@@ -24,16 +24,6 @@ def main():
     monster_boss = monster()
     monster.boss(monster_boss)
 
-    #Combat definition
-    def combat(human, monster):
-        while firstChar.life > 0 or monster.life > 0:
-            monster.life - firstChar.damage
-            print(f'Hit: {firstChar.damage}'
-                  f'\nMonster HP: {monster.life}')
-            if monster.life > 0:
-                firstChar.life - monster.damage
-                print(f'Taken: {monster.damage}'
-                      f'\nHP: {firstChar.life}')
 
     job = input('You can choose a job:'
                            '\nMage (m/M)'
@@ -51,17 +41,30 @@ def main():
         print()
         firstChar.attribute_print()
 
-    if job == 'g' or job == 'G':
+    if job == 'w' or job == 'W':
         human.warrior(firstChar)
         print('Congrats! You are a warrior now!')
         firstChar.attribute_print()
+
+        # Combat definition
+    def combat(human, monster):
+        while firstChar.life > 0 and monster_noob.life > 0:
+            monster_noob.life -= firstChar.damage
+            print(f'Hit: {firstChar.damage}'
+                    f'\nMonster HP: {monster_noob.life}')
+            if monster.life > 0:
+                firstChar.life -= monster_noob.damage
+                print(f'Taken: {monster_noob.damage}'
+                        f'\nHP: {firstChar.life}')
+            else:
+                print('The monster is now dead.')
 
     #Introduction/Creation
 
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
-
+    combat(firstChar, monster_noob)
 if '__name__' == '__main__':
     main()
 
