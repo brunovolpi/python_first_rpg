@@ -31,7 +31,17 @@ class human:
         self.stre += 3
         self.intel += 1
         self.dex += 2
-        self.damage = self.stre * 1.5
+
+    def warrior_attacks(self):
+        kick = self.stre * 1.5
+        punch = self.stre * 1.3
+        attack = input('Choose your attack:'
+                       '\nKick [k]'
+                       '\nPunch [p]')
+        if attack == 'k' or attack == 'K':
+            return kick
+        elif attack == 'p' or attack == 'P':
+            return punch
 
     def archer(self): # +1 stre, +1 intel, +4 dex, +5 life = 1 + 1 + 4 + 2 = 8
         self.life += 5
