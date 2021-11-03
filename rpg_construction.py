@@ -32,6 +32,7 @@ class human:
         self.stre += 3
         self.intel += 1
         self.dex += 2
+        
 
     def archer(self): # +1 stre, +1 intel, +4 dex, +5 life = 1 + 1 + 4 + 2 = 8
         self.life += 5
