@@ -49,8 +49,14 @@ def main():
         print()
         firstChar.attribute_print()
 
-        # Combat definition
-    def combat(character, monster):
+
+
+
+                            ########## Combat definition ##########
+
+
+
+    def combat_noob(character, monster):
         while firstChar.life > 0 and monster_noob.life > 0:
             print()
             monster_noob.life -= firstChar.attack(input('Choose your attack:'
@@ -70,12 +76,29 @@ def main():
             else:
                 print('You are dead!')
 
+    def combat_noob(character, monster):
+        while firstChar.life > 0 and monster_noob.life > 0:
+            print()
+            monster_noob.life -= firstChar.attack()
+            print()
+            print(f'\nHit: {firstChar.damage}'
+                    f'\nMonster HP: {monster_noob.life}')
+            if monster.life > 0:
+                firstChar.life -= monster_noob.damage
+                print(f'Taken: {monster_noob.damage}'
+                        f'\nHP: {firstChar.life}')
+            elif monster_noob.life <= 0:
+                print('The monster is now dead...')
+            else:
+                print('You are dead!')
+
+
     #Introduction/Creation
 
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
-    combat(firstChar, monster_noob)
+    combat_noob(firstChar, monster_noob)
 if '__name__' == '__main__':
     main()
 
