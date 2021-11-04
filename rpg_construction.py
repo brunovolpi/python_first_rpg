@@ -26,12 +26,35 @@ class human:
 #sooo 1 point of essential stats = 2.5 more importance at general effect
 #so 2 essential stats = 5 life (in weight)
 
+
+#In summary those are the leveling attributes
     def warrior(self): # +3 stre, +1 intel, +2 dex, +5 life = 3+1+2 + "5 / 2.5" = 8
         self.life += 5
         self.stre += 3
         self.intel += 1
         self.dex += 2
 
+    def archer(self): # +1 stre, +1 intel, +4 dex, +5 life = 1 + 1 + 4 + 2 = 8
+        self.life += 5
+        self.stre += 1
+        self.intel += 1
+        self.dex += 4
+
+    def mage(self): # +0 stre, + 5 intel, + 1 dex, + 5 life = 0 + 5 + 1 + 2 = 8
+        self.life += 5
+        self.stre += 0
+        self.intel += 5
+        self.dex += 1
+
+    def xp_gain(self, monster_xp):
+        self.xp -= monster_xp
+
+    def level_up(self):
+        if self.xp <= 0:
+            print('Level up!')
+
+#And this one reffers to the job's exclusivities, such as movements and future features
+class warrior_job:
     def warrior_attacks(self):
         kick = self.stre * 1.5
         punch = self.stre * 1.3
@@ -43,26 +66,14 @@ class human:
         elif attack == 'p' or attack == 'P':
             return punch
 
-    def archer(self): # +1 stre, +1 intel, +4 dex, +5 life = 1 + 1 + 4 + 2 = 8
-        self.life += 5
-        self.stre += 1
-        self.intel += 1
-        self.dex += 4
-        self.damage = self.dex * 1.5
-
-    def mage(self): # +0 stre, + 5 intel, + 1 dex, + 5 life = 0 + 5 + 1 + 2 = 8
-        self.life += 5
-        self.stre += 0
-        self.intel += 5
-        self.dex += 1
-        self.damage = self.intel * 1.5
-
-    def xp_gain(self, monster_xp):
-        self.xp -= monster_xp
-
-    def level_up(self):
-        if self.xp <= 0:
-            print('Level up!')
+class archer_job:
+    def archer_attacks(self):
+        kick = ( * 1.2) +
+        evade = randint(0, 100)
+        if evade >= 75:
+            print('Você desviou o ataque!')
+        else:
+            print('Você não desviou!')
 
 
 

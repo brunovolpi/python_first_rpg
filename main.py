@@ -46,6 +46,11 @@ def main():
         print('Congrats! You are a warrior now!')
         firstChar.attribute_print()
 
+    def combat(human, monster):
+        if firstChar == human.warrior:
+            while firstChar.life > 0 and monster_noob.life > 0:
+                firstChar.warrior_attacks()
+
         # Combat definition
     def combat(human, monster):
         while firstChar.life > 0 and monster_noob.life > 0:
