@@ -1,5 +1,7 @@
 from time import sleep
-from rpg_construction import human
+from rpg_construction import warrior
+from rpg_construction import mage
+from rpg_construction import archer
 from rpg_construction import monster
 
 def main():
@@ -9,7 +11,6 @@ def main():
     name = input('So... tell me how do you wanna be called: ')
 
     #Character creation
-    firstChar = human(name)
 
     #Monster creation
     monster_noob = monster()
@@ -31,33 +32,43 @@ def main():
                            '\nWarrior (w/W)')
 
     if job == 'm' or job == 'M':
-        human.mage(firstChar)
+        firstChar = mage(name)
         print('Congrats! You are a mage now!')
+        print()
         firstChar.attribute_print()
 
     if job == 'a' or job == 'A':
-        human.archer(firstChar)
+        firstChar = archer(name)
         print('Congrats! You are an archer now!')
         print()
         firstChar.attribute_print()
 
     if job == 'w' or job == 'W':
-        human.warrior(firstChar)
+        firstChar = warrior(name)
         print('Congrats! You are a warrior now!')
+        print()
         firstChar.attribute_print()
 
         # Combat definition
-    def combat(human, monster):
+    def combat(character, monster):
         while firstChar.life > 0 and monster_noob.life > 0:
-            monster_noob.life -= firstChar.damage
-            print(f'Hit: {firstChar.damage}'
-                    f'\nMonster HP: {monster_noob.life}')
+            print()
+            monster_noob.life -= firstChar.attack(input('Choose your attack:'
+                                                        '\nKick: [k/K]'
+                                                        '\nPunch: [p/P]'
+                                                        '\nRumble: [r/R]'
+                                                        '\n'))
+            print()
+            print(f'\nHit: {firstChar.damage}'
+                    f'Monster HP: {monster_noob.life}')
             if monster.life > 0:
                 firstChar.life -= monster_noob.damage
                 print(f'Taken: {monster_noob.damage}'
                         f'\nHP: {firstChar.life}')
+            elif monster_noob.life <= 0:
+                print('The monster is now dead...')
             else:
-                print('The monster is now dead.')
+                print('You are dead!')
 
     #Introduction/Creation
 

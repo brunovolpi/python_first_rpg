@@ -1,16 +1,38 @@
 from random import randint
 
-class human:
+#time to make one class for each job
+
+class warrior:
     def __init__(self, name):
-        self.life = 10
-        self.stre = 1
-        self.intel = 1
-        self.dex = 1
-        self.luck = randint(0,3)
+        self.life = 15
+        self.stre = 4
+        self.intel = 2
+        self.dex = 2
+        self.luck = randint(0, 3)
         self.level = 1
         self.xp = self.level * 20
         self.name = name
 
+    def level_up(self):
+        if self.xp <= 0:
+            self.life += 6
+            self.stre += 3
+            self.intel += 0
+            self.dex += 1
+        else:
+            return False
+
+    def attack(self, input):
+        self.damage = self.stre * 1.5
+        punch = self.damage * 1.1
+        kick = self.damage * 1.1
+        rumble = (self.damage * 1.5)
+        if input == 'p' or input == 'P':
+            return punch
+        elif input == 'k' or input == 'K':
+            return kick
+        elif input == 'r' or input == 'R':
+            return rumble
 
     def attribute_print(self):
         print(f'Life: {self.life}'
@@ -22,39 +44,66 @@ class human:
         print(f'Level: {self.level}'
         f'\nXP: {self.xp}')
 
-#lets say that stre, intel and dex are main stats, and life its essential but secondary
-#sooo 1 point of essential stats = 2.5 more importance at general effect
-#so 2 essential stats = 5 life (in weight)
 
-    def warrior(self): # +3 stre, +1 intel, +2 dex, +5 life = 3+1+2 + "5 / 2.5" = 8
-        self.life += 5
-        self.stre += 3
-        self.intel += 1
-        self.dex += 2
-        self.damage = self.stre * 1.5
-
-    def archer(self): # +1 stre, +1 intel, +4 dex, +5 life = 1 + 1 + 4 + 2 = 8
-        self.life += 5
-        self.stre += 1
-        self.intel += 1
-        self.dex += 4
-        self.damage = self.dex * 1.5
-
-    def mage(self): # +0 stre, + 5 intel, + 1 dex, + 5 life = 0 + 5 + 1 + 2 = 8
-        self.life += 5
-        self.stre += 0
-        self.intel += 5
-        self.dex += 1
-        self.damage = self.intel * 1.5
-
-    def xp_gain(self, monster_xp):
-        self.xp -= monster_xp
+class archer:
+    def __init__(self, name):
+        self.life = 12
+        self.stre = 2
+        self.intel = 2
+        self.dex = 4
+        self.luck = randint(0, 3)
+        self.level = 1
+        self.xp = self.level * 20
+        self.name = name
 
     def level_up(self):
         if self.xp <= 0:
-            print('Level up!')
+            self.life += 3
+            self.stre += 1
+            self.intel += 1
+            self.dex += 5
+        else:
+            return False
 
+    def attribute_print(self):
+        print(f'Life: {self.life}'
+        f'\nStrenght: {self.stre}'
+        f'\nIntelligence: {self.intel}'
+        f'\nDexterity: {self.dex}'
+        f'\nLuck: {self.luck}')
+        print(f'' * 25)
+        print(f'Level: {self.level}'
+        f'\nXP: {self.xp}')
 
+class mage:
+    def __init__(self, name):
+        self.life = 10
+        self.stre = 1
+        self.intel = 5
+        self.dex = 2
+        self.luck = randint(0, 3)
+        self.level = 1
+        self.xp = self.level * 20
+        self.name = name
+
+    def level_up(self):
+        if self.xp <= 0:
+            self.life += 2
+            self.stre += 0
+            self.intel += 7
+            self.dex += 1
+        else:
+            return False
+
+    def attribute_print(self):
+        print(f'Life: {self.life}'
+        f'\nStrenght: {self.stre}'
+        f'\nIntelligence: {self.intel}'
+        f'\nDexterity: {self.dex}'
+        f'\nLuck: {self.luck}')
+        print(f'' * 25)
+        print(f'Level: {self.level}'
+        f'\nXP: {self.xp}')
 
 class monster:
     def __init__(self):
