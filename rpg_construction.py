@@ -15,28 +15,15 @@ class warrior:
         self.name = name
 
     def level_up(self):
-        if self.xp <= 0:
-            self.cons += 2
-            self.stre += 3
-            self.intel += 1
-            self.dex += 1
-        else:
-            return False
+        print('Level up!')
+        print()
+        self.cons += 2
+        self.stre += 3
+        self.intel += 1
+        self.dex += 1
+        self.xp = self.level * 20
+        self.level += 1
 
-
-    """def monster_fight(self):
-        while firstChar.life > 0 and monster_noob.life > 0:
-            print()
-            monster_noob.life -= firstChar.attack()
-            print()
-            print(f'\nHit: {firstChar.damage}'
-                    f'Monster HP: {monster_noob.life}')
-            if monster.life > 0:
-                firstChar.life -= monster_noob.damage
-                print(f'Taken: {monster_noob.damage}'
-                        f'\nHP: {firstChar.life}')
-            elif monster_noob.life <= 0:
-                print('The monster is now dead...')"""
 
     def attack(self):
         self.damage = self.stre * 1.5
@@ -62,7 +49,7 @@ class warrior:
         f'\nLuck: {self.luck}')
         print(f'' * 25)
         print(f'Level: {self.level}'
-        f'\nXP: {self.xp}')
+        f'\nXP Remainig: {self.xp}')
 
 
 class archer:
@@ -78,16 +65,15 @@ class archer:
         self.xp = self.level * 20
         self.name = name
 
+
     def level_up(self):
-        if self.xp <= 0:
-            self.cons += 1
-            self.stre += 1
-            self.intel += 1
-            self.dex += 4
-        else:
-            return False
-
-
+        print('Level up!')
+        self.cons += 1
+        self.stre += 1
+        self.intel += 1
+        self.dex += 4
+        self.level += 1
+        self.xp = self.level * 20
 
 
     def attack(self):
@@ -120,7 +106,7 @@ class archer:
         f'\nLuck: {self.luck}')
         print(f'' * 25)
         print(f'Level: {self.level}'
-        f'\nXP: {self.xp}')
+        f'\nXP Remainig: {self.xp}')
 
 class mage:
     def __init__(self, name):
@@ -136,13 +122,13 @@ class mage:
         self.name = name
 
     def level_up(self):
-        if self.xp <= 0:
-            self.cons += 1
-            self.stre += 1
-            self.intel += 4
-            self.dex += 1
-        else:
-            return False
+        print('Level Up!')
+        self.cons += 1
+        self.stre += 1
+        self.intel += 4
+        self.dex += 1
+        self.xp = self.level * 20
+        self.level += 1
 
     def attack(self):
         self.damage = self.stre * 1.5
@@ -167,11 +153,6 @@ class mage:
             return int(freeze)
 
 
-
-
-
-
-
     def attribute_print(self):
         print(f'Life: {self.life}'
               f'\nMana: {self.mana}'
@@ -182,7 +163,7 @@ class mage:
               f'\nLuck: {self.luck}')
         print(f'' * 25)
         print(f'Level: {self.level}'
-              f'\nXP: {self.xp}')
+              f'\nXP Remaining: {self.xp}')
 
 class monster_noob:
     def __init__(self):

@@ -11,6 +11,7 @@ from rpg_construction import monster_boss
 
 
 def main():
+
     print('Hi and welcome to my game!'
           '\nThis is a pretty iniciant coder rpg game')
     print()
@@ -67,12 +68,16 @@ def main():
                     break
             elif monster.life <= 0:
                 print('The monster is now dead...')
-
+                pass
+                character.xp -= monster.xp
+                if character.xp <= 0:
+                    character.level_up()
+                    print()
 
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
-    combat(firstChar, boss)
+    combat(firstChar, beginner_monster)
     firstChar.attribute_print()
 if '__name__' == '__main__':
     main()
