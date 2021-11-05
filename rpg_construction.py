@@ -1,6 +1,29 @@
 from random import randint
-
+from weapons import basic_sword
 #time to make one class for each job
+
+def combat(character, monster):
+    while character.life > 0 and monster.life > 0:
+        print()
+        monster.life -= character.attack() + monster.defense
+        print()
+        print(f'\nHit: {character.damage}'
+              f'\nMonster HP: {monster.life}')
+        if monster.life > 0:
+            character.life -= monster.damage
+            print(f'Taken: {monster.damage}'
+                  f'\nHP: {character.life}')
+            if character.life <= 0:
+                print('You are dead!')
+                break
+        elif monster.life <= 0:
+            print('The monster is now dead...')
+            pass
+            character.xp -= monster.xp
+            print(f'You gained: {monster.xp} XP')
+            if character.xp <= 0:
+                character.level_up()
+                print()
 
 class warrior:
     def __init__(self, name):

@@ -1,4 +1,6 @@
 from time import sleep
+from rpg_construction import combat
+
 
 from rpg_construction import warrior
 from rpg_construction import mage
@@ -8,6 +10,8 @@ from rpg_construction import monster_noob
 from rpg_construction import monster_medium
 from rpg_construction import monster_high
 from rpg_construction import monster_boss
+
+from weapons import basic_sword
 
 
 def main():
@@ -49,35 +53,14 @@ def main():
         print()
         firstChar.attribute_print()
 
-
-                            ########## Combat definition ##########
-
-    def combat(character, monster):
-        while character.life > 0 and monster.life > 0:
-            print()
-            monster.life -= character.attack() + monster.defense
-            print()
-            print(f'\nHit: {character.damage}'
-                    f'\nMonster HP: {monster.life}')
-            if monster.life > 0:
-                character.life -= monster.damage
-                print(f'Taken: {monster.damage}'
-                        f'\nHP: {character.life}')
-                if character.life <= 0:
-                    print('You are dead!')
-                    break
-            elif monster.life <= 0:
-                print('The monster is now dead...')
-                pass
-                character.xp -= monster.xp
-                if character.xp <= 0:
-                    character.level_up()
-                    print()
-
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
     combat(firstChar, beginner_monster)
+    firstChar.attribute_print()
+    print()
+    print('Now lets equip you a sword!')
+    basic_sword(firstChar)
     firstChar.attribute_print()
 if '__name__' == '__main__':
     main()
