@@ -160,8 +160,10 @@ class mage:
         elif self.input == 'k' or self.input == 'K':
             return int(kick)
         elif self.input == 'b' or self.input == 'B':
+            self.mana -= 5
             return int(burn)
         elif self.input == 'f' or self.input == 'F':
+            self.mana -= 5
             return int(freeze)
 
 
