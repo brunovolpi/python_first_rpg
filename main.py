@@ -12,6 +12,9 @@ from rpg_construction import monster_high
 from rpg_construction import monster_boss
 
 from weapons import basic_sword
+from weapons import basic_bow
+from weapons import basic_shield
+from weapons import basic_wand
 
 
 def main():
@@ -59,8 +62,14 @@ def main():
     combat(firstChar, beginner_monster)
     firstChar.attribute_print()
     print()
-    print('Now lets equip you a sword!')
-    basic_sword(firstChar)
+    print('Now lets equip you something!')
+    if firstChar.job == 'warrior':
+        basic_sword(firstChar)
+        basic_shield(firstChar)
+    elif firstChar.job == 'archer':
+        basic_bow(firstChar)
+    elif firstChar.job == 'mage':
+        basic_wand(firstChar)
     firstChar.attribute_print()
 if '__name__' == '__main__':
     main()

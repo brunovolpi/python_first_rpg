@@ -10,7 +10,7 @@ def combat(character, monster):
         print(f'\nHit: {character.damage}'
               f'\nMonster HP: {monster.life}')
         if monster.life > 0:
-            character.life -= monster.damage
+            character.life -= monster.damage + character.defense
             print(f'Taken: {monster.damage}'
                   f'\nHP: {character.life}')
             if character.life <= 0:
@@ -27,10 +27,12 @@ def combat(character, monster):
 
 class warrior:
     def __init__(self, name):
+        self.job = 'warrior'
         self.stre = 4
         self.intel = 2
         self.dex = 2
         self.cons = 4
+        self.defense = int(self.cons / 2)
         self.life = self.cons * 6
         self.luck = randint(0, 3)
         self.level = 1
@@ -44,8 +46,8 @@ class warrior:
         self.stre += 3
         self.intel += 1
         self.dex += 1
-        self.xp = self.level * 20
         self.level += 1
+        self.xp = self.level * 20
 
 
     def attack(self):
@@ -77,10 +79,12 @@ class warrior:
 
 class archer:
     def __init__(self, name):
+        self.job = 'archer'
         self.stre = 2
         self.intel = 2
         self.dex = 4
         self.cons = 3
+        self.defense = int(self.cons / 2)
         self.life = self.cons * 5
         self.mana = self.intel * 3
         self.luck = randint(0, 3)
@@ -133,7 +137,9 @@ class archer:
 
 class mage:
     def __init__(self, name):
+        self.job = 'mage'
         self.cons = 2
+        self.defense = int(self.cons / 2)
         self.stre = 1
         self.intel = 5
         self.dex = 2
