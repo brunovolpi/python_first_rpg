@@ -41,7 +41,7 @@ class warrior:
     def attack(self):
         self.damage = self.stre * 1.5
         punch = self.damage * 1.1
-        kick = self.damage * 1.1
+        kick = self.damage * 1.2
         rumble = self.damage * 1.5
         self.input = input('Kick: [k/K]'
                       '\nPunch: [p/P]'
@@ -87,17 +87,28 @@ class archer:
         else:
             return False
 
-    def attack(self, input):
+
+
+
+    def attack(self):
+        critical = randint(0, 100)
         self.damage = self.stre * 1.5
+        self.pierce_damage = self.dex * 1.5
         punch = self.damage * 1.1
-        kick = self.damage * 1.1
-        rumble = (self.damage * 1.5)
-        if input == 'p' or input == 'P':
-            return punch
-        elif input == 'k' or input == 'K':
-            return kick
-        elif input == 'r' or input == 'R':
-            return rumble
+        kick = self.damage * 1.2
+        stab = self.pierce_damage * 1.5
+        self.input = input('Kick: [k/K]'
+                           '\nPunch: [p/P]'
+                           '\nStab: [s/S]')
+        if self.input == 'p' or self.input == 'P':
+            return int(punch)
+        elif self.input == 'k' or self.input == 'K':
+            return int(kick)
+        elif self.input == 's' or self.input == 'S':
+            if critical >= 90:
+                return stab * 2
+            else:
+                return int(stab)
 
     def attribute_print(self):
         print(f'Life: {self.life}'
@@ -113,11 +124,13 @@ class archer:
 
 class mage:
     def __init__(self, name):
-        self.life = 10
+        self.cons = 2
         self.stre = 1
         self.intel = 5
         self.dex = 2
         self.luck = randint(0, 3)
+        self.life = self.cons * 5
+        self.mana = self.intel * 6
         self.level = 1
         self.xp = self.level * 20
         self.name = name
@@ -131,17 +144,31 @@ class mage:
         else:
             return False
 
-    def attack(self, input):
+    def attack(self):
         self.damage = self.stre * 1.5
+        self.magic_damage = self.intel * 1.5
         punch = self.damage * 1.1
-        kick = self.damage * 1.1
-        rumble = (self.damage * 1.5)
-        if input == 'p' or input == 'P':
-            return punch
-        elif input == 'k' or input == 'K':
-            return kick
-        elif input == 'r' or input == 'R':
-            return rumble
+        kick = self.damage * 1.2
+        burn = self.magic_damage * 1.5
+        freeze = self.magic_damage * 1.5
+        self.input = input('Kick: [k/K]'
+                           '\nPunch: [p/P]'
+                           '\nBurn: [b/B]'
+                           '\nFreeze: [f/F]')
+        if self.input == 'p' or self.input == 'P':
+            return int(punch)
+        elif self.input == 'k' or self.input == 'K':
+            return int(kick)
+        elif self.input == 'b' or self.input == 'B':
+            return int(burn)
+        elif self.input == 'f' or self.input == 'F':
+            return int(freeze)
+
+
+
+
+
+
 
     def attribute_print(self):
         print(f'Life: {self.life}'

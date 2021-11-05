@@ -99,6 +99,7 @@ def main():
     print('Now lets try a fight!')
     print()
     combat_noob(firstChar, monster_noob)
+    firstChar.attribute_print()
 if '__name__' == '__main__':
     main()
 
