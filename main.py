@@ -1,8 +1,14 @@
 from time import sleep
+
 from rpg_construction import warrior
 from rpg_construction import mage
 from rpg_construction import archer
-from rpg_construction import monster
+
+from rpg_construction import monster_noob
+from rpg_construction import monster_medium
+from rpg_construction import monster_high
+from rpg_construction import monster_boss
+
 
 def main():
     print('Hi and welcome to my game!'
@@ -13,17 +19,10 @@ def main():
     #Character creation
 
     #Monster creation
-    monster_noob = monster()
-    monster.noob(monster_noob)
-
-    monster_medium = monster()
-    monster.medium(monster_medium)
-
-    monster_advanced = monster()
-    monster.advanced(monster_advanced)
-
-    monster_boss = monster()
-    monster.boss(monster_boss)
+    beginner_monster = monster_noob()
+    intermediate_monster = monster_medium()
+    higher_monster = monster_high()
+    boss = monster_boss()
 
 
     job = input('You can choose a job:'
@@ -50,55 +49,30 @@ def main():
         firstChar.attribute_print()
 
 
-
-
                             ########## Combat definition ##########
 
-
-
-    def combat_noob(character, monster):
-        while firstChar.life > 0 and monster_noob.life > 0:
+    def combat(character, monster):
+        while character.life > 0 and monster.life > 0:
             print()
-            monster_noob.life -= firstChar.attack(input('Choose your attack:'
-                                                        '\nKick: [k/K]'
-                                                        '\nPunch: [p/P]'
-                                                        '\nRumble: [r/R]'
-                                                        '\n'))
+            monster.life -= character.attack() + monster.defense
             print()
-            print(f'\nHit: {firstChar.damage}'
-                    f'Monster HP: {monster_noob.life}')
+            print(f'\nHit: {character.damage}'
+                    f'\nMonster HP: {monster.life}')
             if monster.life > 0:
-                firstChar.life -= monster_noob.damage
-                print(f'Taken: {monster_noob.damage}'
-                        f'\nHP: {firstChar.life}')
-            elif monster_noob.life <= 0:
+                character.life -= monster.damage
+                print(f'Taken: {monster.damage}'
+                        f'\nHP: {character.life}')
+                if character.life <= 0:
+                    print('You are dead!')
+                    break
+            elif monster.life <= 0:
                 print('The monster is now dead...')
-            else:
-                print('You are dead!')
 
-    def combat_noob(character, monster):
-        while firstChar.life > 0 and monster_noob.life > 0:
-            print()
-            monster_noob.life -= firstChar.attack()
-            print()
-            print(f'\nHit: {firstChar.damage}'
-                    f'\nMonster HP: {monster_noob.life}')
-            if monster.life > 0:
-                firstChar.life -= monster_noob.damage
-                print(f'Taken: {monster_noob.damage}'
-                        f'\nHP: {firstChar.life}')
-            elif monster_noob.life <= 0:
-                print('The monster is now dead...')
-            else:
-                print('You are dead!')
-
-
-    #Introduction/Creation
 
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
-    combat_noob(firstChar, monster_noob)
+    combat(firstChar, boss)
     firstChar.attribute_print()
 if '__name__' == '__main__':
     main()

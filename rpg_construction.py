@@ -184,30 +184,36 @@ class mage:
         print(f'Level: {self.level}'
               f'\nXP: {self.xp}')
 
-class monster:
+class monster_noob:
     def __init__(self):
-        self.life = 0
-        self.damage = 0
-        self.defense = 0
-        xp = self.life * 1.5
+        self.life = 15
+        self.damage = 3
+        self.defense = 1
+        self.xp = self.life * 2
 
-    def noob(self):
-        self.life += 10
-        self.damage += 3
-        self.defense += 1
+class monster_medium:
+    def __init__(self):
+        self.life = 30
+        self.damage = 7
+        self.defense = 3
+        self.xp = self.life * 2
 
-    def medium(self):
-        self.life += 25
-        self.damage += 8
-        self.defense += 4
+class monster_high:
+    def __init__(self):
+        bonus_xp = randint(0, 100)
+        self.life = 50
+        self.damage = 12
+        self.defense = 7
+        self.xp = self.life * 2
+        if bonus_xp >= 90:
+            self.xp *= 1.2
 
-    def advanced(self):
-        self.life += 60
-        self.damage += 20
-        self.defense += 10
-
-    def boss(self):
-        self.life += 150
-        self.damage += 50
-        self.defense += 30
-
+class monster_boss:
+    def __init__(self):
+        bonus_xp = randint(0, 100)
+        self.life = 200
+        self.damage = 35
+        self.defense = 15
+        self.xp = self.life * 2
+        if bonus_xp >= 90:
+            self.xp *= 1.2
