@@ -23,8 +23,10 @@ def main():
           '\nThis is a pretty iniciant coder rpg game')
     print()
     name = input('So... tell me how do you wanna be called: ')
-
-    #Character creation
+    print()
+    sleep(0.5)
+    print(f'Pleased to meet you {name}, lets begin our game!')
+    sleep(0.5)
 
     #Monster creation
     beginner_monster = monster_noob()
@@ -32,8 +34,11 @@ def main():
     higher_monster = monster_high()
     boss = monster_boss()
 
-
-    job = input('You can choose a job:'
+    print('There are 3 jobs:\n'
+          '\nWarrior: High HP, strong melee tanks'
+          '\nArchers: Critical chance attacks, Hibrid gameplay'
+          '\nMages: Very strong spells, low HP')
+    job = input('Choose a job:'
                            '\nMage (m/M)'
                            '\nArcher (a/A)'
                            '\nWarrior (w/W)')
