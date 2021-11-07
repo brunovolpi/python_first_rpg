@@ -22,10 +22,12 @@ def main():
     print('Hi and welcome to my game!'
           '\nThis is a pretty iniciant coder rpg game')
     print()
+    sleep(0.5)
     name = input('So... tell me how do you wanna be called: ')
     print()
     sleep(0.5)
     print(f'Pleased to meet you {name}, lets begin our game!')
+    print()
     sleep(0.5)
 
     #Monster creation
@@ -34,32 +36,41 @@ def main():
     higher_monster = monster_high()
     boss = monster_boss()
 
-    print('There are 3 jobs:\n'
+    print('There are 3 jobs:'
           '\nWarrior: High HP, strong melee tanks'
-          '\nArchers: Critical chance attacks, Hibrid gameplay'
+          '\nArchers: Critical chance attacks, hibrid gameplay'
           '\nMages: Very strong spells, low HP')
+    print()
     job = input('Choose a job:'
-                           '\nMage (m/M)'
+                           '\nWarrior (w/W)'
                            '\nArcher (a/A)'
-                           '\nWarrior (w/W)')
+                           '\nMage (m/M)')
 
-    if job == 'm' or job == 'M':
-        firstChar = mage(name)
-        print('Congrats! You are a mage now!')
-        print()
-        firstChar.attribute_print()
+    while job != 'w' and job != 'W' and job != 'a' and job != 'A' and job != 'm' and job != 'M':
+        job = input('\nTry the matching options again'
+                    '\n'
+                    '\nChoose a job:'
+                    '\nWarrior (w/W)'
+                    '\nArcher (a/A)'
+                    '\nMage (m/M)')
 
-    if job == 'a' or job == 'A':
-        firstChar = archer(name)
-        print('Congrats! You are an archer now!')
-        print()
-        firstChar.attribute_print()
+        if job == 'm' or job == 'M':
+            firstChar = mage(name)
+            print('Congrats! You are a mage now!')
+            print()
+            firstChar.attribute_print()
 
-    if job == 'w' or job == 'W':
-        firstChar = warrior(name)
-        print('Congrats! You are a warrior now!')
-        print()
-        firstChar.attribute_print()
+        elif job == 'a' or job == 'A':
+            firstChar = archer(name)
+            print('Congrats! You are an archer now!')
+            print()
+            firstChar.attribute_print()
+
+        elif job == 'w' or job == 'W':
+            firstChar = warrior(name)
+            print('Congrats! You are a warrior now!')
+            print()
+            firstChar.attribute_print()
 
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
