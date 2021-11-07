@@ -59,22 +59,29 @@ def main():
             print('Congrats! You are a mage now!')
             print()
             firstChar.attribute_print()
+            sleep(0.5)
+            pass
 
         elif job == 'a' or job == 'A':
             firstChar = archer(name)
             print('Congrats! You are an archer now!')
             print()
             firstChar.attribute_print()
+            sleep(0.5)
+            pass
 
         elif job == 'w' or job == 'W':
             firstChar = warrior(name)
             print('Congrats! You are a warrior now!')
             print()
             firstChar.attribute_print()
+            sleep(0.5)
+            pass
 
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
+    sleep(0.5)
     combat(firstChar, beginner_monster)
     firstChar.attribute_print()
     print()

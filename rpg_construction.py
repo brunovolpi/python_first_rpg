@@ -3,7 +3,8 @@ from weapons import basic_sword
 #time to make one class for each job
 
 def combat(character, monster):
-    print('=' * 30)
+    print('=' * 50)
+    print('=' * 18, 'Combat time!', '=' * 18)
     while character.life > 0 and monster.life > 0:
         print()
         monster.life -= character.attack() + monster.defense
