@@ -38,7 +38,7 @@ class warrior:
         self.defense = int(self.cons / 2)
         self.life = self.cons * 6
         self.luck = randint(0, 3)
-        self.level = 1
+        self.level = 5
         self.xp = self.level * 20
         self.name = name
 
@@ -58,15 +58,30 @@ class warrior:
         punch = self.damage * 1.1
         kick = self.damage * 1.2
         rumble = self.damage * 1.5
-        self.input = input('Kick: [k/K]'
-                      '\nPunch: [p/P]'
-                      '\nRumble: [r/R]')
-        if self.input == 'p' or self.input == 'P':
-            return int(punch)
-        elif self.input == 'k' or self.input == 'K':
-            return int(kick)
-        elif self.input == 'r' or self.input == 'R':
-            return int(rumble)
+        strike = self.damage * 2
+        if self.level >= 5:
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nRumble: [r/R]'
+                               '\nStrike: [s/S]')
+            if self.input == 's' or self.input == 'S':
+                return int(strike)
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 'r' or self.input == 'R':
+                return int(rumble)
+        elif self.level < 5:
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nRumble: [r/R]')
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 'r' or self.input == 'R':
+                return int(rumble)
 
     def attribute_print(self):
         print(f'Life: {self.life}'
@@ -113,6 +128,7 @@ class archer:
         punch = self.damage * 1.1
         kick = self.damage * 1.2
         stab = self.pierce_damage * 1.5
+        if self.level >= 5:
         self.input = input('Kick: [k/K]'
                            '\nPunch: [p/P]'
                            '\nStab: [s/S]')

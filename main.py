@@ -41,6 +41,7 @@ def main():
           '\nArchers: Critical chance attacks, hibrid gameplay'
           '\nMages: Very strong spells, low HP')
     print()
+    sleep(0.5)
     job = input('Choose a job:'
                            '\nWarrior (w/W)'
                            '\nArcher (a/A)'
@@ -53,6 +54,7 @@ def main():
                         '\nWarrior (w/W)'
                         '\nArcher (a/A)'
                         '\nMage (m/M)')
+            sleep(0.5)
             pass
         pass
     else:
@@ -60,6 +62,7 @@ def main():
             firstChar = mage(name)
             print('Congrats! You are a mage now!')
             print()
+            print('These are your current attributes:')
             firstChar.attribute_print()
             sleep(0.5)
             pass
@@ -68,6 +71,7 @@ def main():
             firstChar = archer(name)
             print('Congrats! You are an archer now!')
             print()
+            print('These are your current attributes:')
             firstChar.attribute_print()
             sleep(0.5)
             pass
@@ -76,6 +80,7 @@ def main():
             firstChar = warrior(name)
             print('Congrats! You are a warrior now!')
             print()
+            print('These are your current attributes:')
             firstChar.attribute_print()
             sleep(0.5)
             pass
