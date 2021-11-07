@@ -8,25 +8,26 @@ def combat(character, monster):
     print('=' * 50)
     while character.life > 0 and monster.life > 0:
         print()
-        monster.life -= character.attack() + monster.defense
-        print()
-        print(f'\nHit: {character.damage}'
-              f'\nMonster HP: {monster.life}')
-        if monster.life > 0:
-            character.life -= monster.damage + character.defense
-            print(f'Taken: {monster.damage}'
-                  f'\nHP: {character.life}')
-            if character.life <= 0:
-                print('You are dead!')
-                break
-        elif monster.life <= 0:
-            print('The monster is now dead...')
-            pass
-            character.xp -= monster.xp
-            print(f'You gained: {monster.xp} XP')
-            if character.xp <= 0:
-                character.level_up()
-                print()
+        if character.attack() != 'h' and character.attack() != 'H':
+            monster.life -= character.attack() + monster.defense
+            print()
+            print(f'\nHit: {character.damage}'
+                  f'\nMonster HP: {monster.life}')
+            if monster.life > 0:
+                character.life -= monster.damage + character.defense
+                print(f'Taken: {monster.damage}'
+                      f'\nHP: {character.life}')
+                if character.life <= 0:
+                    print('You are dead!')
+                    break
+            elif monster.life <= 0:
+                print('The monster is now dead...')
+                pass
+                character.xp -= monster.xp
+                print(f'You gained: {monster.xp} XP')
+                if character.xp <= 0:
+                    character.level_up()
+                    print()
 
 class warrior:
     def __init__(self, name):
@@ -187,7 +188,7 @@ class mage:
         self.luck = randint(0, 3)
         self.life = self.cons * 5
         self.mana = self.intel * 6
-        self.level = 1
+        self.level = 5
         self.xp = self.level * 20
         self.name = name
 
@@ -227,7 +228,7 @@ class mage:
             elif self.input == 'h' or self.input == 'H':
                 self.mana -= 5
                 self.life += heal
-                return f'Healed: {heal}'
+                print(f'Healed: {heal}')
         elif self.level < 5:
             self.input = input('Kick: [k/K]'
                                '\nPunch: [p/P]'
