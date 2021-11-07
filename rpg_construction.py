@@ -62,7 +62,7 @@ class warrior:
         if self.level >= 5:
             self.input = input('Kick: [k/K]'
                                '\nPunch: [p/P]'
-                               '\nRumble: [r/R]'
+                               '\nRumble (-1 life): [r/R]'
                                '\nStrike: [s/S]')
             if self.input == 's' or self.input == 'S':
                 return int(strike)
@@ -71,16 +71,18 @@ class warrior:
             elif self.input == 'k' or self.input == 'K':
                 return int(kick)
             elif self.input == 'r' or self.input == 'R':
+                self.life -= 1
                 return int(rumble)
         elif self.level < 5:
             self.input = input('Kick: [k/K]'
                                '\nPunch: [p/P]'
-                               '\nRumble: [r/R]')
+                               '\nRumble (-1 life): [r/R]')
             if self.input == 'p' or self.input == 'P':
                 return int(punch)
             elif self.input == 'k' or self.input == 'K':
                 return int(kick)
             elif self.input == 'r' or self.input == 'R':
+                self.life -= 1
                 return int(rumble)
 
     def attribute_print(self):
@@ -128,19 +130,39 @@ class archer:
         punch = self.damage * 1.1
         kick = self.damage * 1.2
         stab = self.pierce_damage * 1.5
+        arrow_strike = self.pierce_damage * 1.5
         if self.level >= 5:
-        self.input = input('Kick: [k/K]'
-                           '\nPunch: [p/P]'
-                           '\nStab: [s/S]')
-        if self.input == 'p' or self.input == 'P':
-            return int(punch)
-        elif self.input == 'k' or self.input == 'K':
-            return int(kick)
-        elif self.input == 's' or self.input == 'S':
-            if critical >= 90:
-                return stab * 2
-            else:
-                return int(stab)
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nStab: [s/S]'
+                               '\nArrow Strike: [as/AS]')
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 's' or self.input == 'S':
+                if critical >= 90:
+                    return stab * 2
+                else:
+                    return int(stab)
+            elif self.input == 'as' or self.input == 'AS':
+                if critical >= 80:
+                    return int(arrow_strike) * 2
+                else:
+                    return int(arrow_strike)
+        elif self.level < 5:
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nStab: [s/S]')
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 's' or self.input == 'S':
+                if critical >= 90:
+                    return int(stab) * 2
+                else:
+                    return int(stab)
 
     def attribute_print(self):
         print(f'Life: {self.life}'
@@ -184,21 +206,43 @@ class mage:
         punch = self.damage * 1.1
         kick = self.damage * 1.2
         burn = self.magic_damage * 1.5
+        heal = (self.intel / 10)
         freeze = self.magic_damage * 1.5
-        self.input = input('Kick: [k/K]'
-                           '\nPunch: [p/P]'
-                           '\nBurn: [b/B]'
-                           '\nFreeze: [f/F]')
-        if self.input == 'p' or self.input == 'P':
-            return int(punch)
-        elif self.input == 'k' or self.input == 'K':
-            return int(kick)
-        elif self.input == 'b' or self.input == 'B':
-            self.mana -= 5
-            return int(burn)
-        elif self.input == 'f' or self.input == 'F':
-            self.mana -= 5
-            return int(freeze)
+        if self.level >= 5:
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nBurn: (-5 mana): [b/B]'
+                               '\nFreeze: (-5 mana): [f/F]'
+                               '\nHeal(-5 mana): [h/H]')
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 'b' or self.input == 'B':
+                self.mana -= 5
+                return int(burn)
+            elif self.input == 'f' or self.input == 'F':
+                self.mana -= 5
+                return int(freeze)
+            elif self.input == 'h' or self.input == 'H':
+                self.mana -= 5
+                self.life += heal
+                return f'Healed: {heal}'
+        elif self.level < 5:
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nBurn: (-5 mana): [b/B]'
+                               '\nFreeze: (-5 mana): [f/F]')
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 'b' or self.input == 'B':
+                self.mana -= 5
+                return int(burn)
+            elif self.input == 'f' or self.input == 'F':
+                self.mana -= 5
+                return int(freeze)
 
 
     def attribute_print(self):
