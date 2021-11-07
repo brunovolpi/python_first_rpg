@@ -5,6 +5,7 @@ from weapons import basic_sword
 def combat(character, monster):
     print('=' * 50)
     print('=' * 18, 'Combat time!', '=' * 18)
+    print('=' * 50)
     while character.life > 0 and monster.life > 0:
         print()
         monster.life -= character.attack() + monster.defense

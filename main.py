@@ -45,16 +45,17 @@ def main():
                            '\nWarrior (w/W)'
                            '\nArcher (a/A)'
                            '\nMage (m/M)')
-
     while job != 'w' and job != 'W' and job != 'a' and job != 'A' and job != 'm' and job != 'M':
-        job = input('\nTry the matching options again'
-                    '\n'
-                    '\nChoose a job:'
-                    '\nWarrior (w/W)'
-                    '\nArcher (a/A)'
-                    '\nMage (m/M)')
+        if job != 'w' and job != 'W' and job != 'a' and job != 'A' and job != 'm' and job != 'M':
+            job = input('\nTry the matching options again'
+                        '\n'
+                        '\nChoose a job:'
+                        '\nWarrior (w/W)'
+                        '\nArcher (a/A)'
+                        '\nMage (m/M)')
+            pass
         pass
-
+    else:
         if job == 'm' or job == 'M':
             firstChar = mage(name)
             print('Congrats! You are a mage now!')
