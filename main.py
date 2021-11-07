@@ -53,6 +53,7 @@ def main():
                     '\nWarrior (w/W)'
                     '\nArcher (a/A)'
                     '\nMage (m/M)')
+        pass
 
         if job == 'm' or job == 'M':
             firstChar = mage(name)
