@@ -2,13 +2,38 @@ from random import randint
 from weapons import basic_sword
 #time to make one class for each job
 
-def combat(character, monster):
+def combat_non_magic(character, monster):
+    while character.life > 0 and monster.life > 0:
+        print()
+        monster.life -= character.attack() + monster.defense
+        print()
+        print(f'\nHit: {character.damage}'
+              f'\nMonster HP: {monster.life}')
+        if monster.life > 0:
+            character.life -= monster.damage + character.defense
+            print(f'Taken: {monster.damage}'
+                  f'\nHP: {character.life}')
+            if character.life <= 0:
+                print('You are dead!')
+                break
+        elif monster.life <= 0:
+            print('The monster is now dead...')
+            pass
+            character.xp -= monster.xp
+            print(f'You gained: {monster.xp} XP')
+            if character.xp <= 0:
+                character.level_up()
+                print()
+
+def combat_mage(character, monster):
     print('=' * 50)
     print('=' * 18, 'Combat time!', '=' * 18)
     print('=' * 50)
     while character.life > 0 and monster.life > 0:
-        print()
-        if character.attack() != 'h' and character.attack() != 'H':
+        if character.attack() == 'h' or character.attack() == 'H':
+            character.life += character.attack()
+        else:
+            print()
             monster.life -= character.attack() + monster.defense
             print()
             print(f'\nHit: {character.damage}'
@@ -39,7 +64,7 @@ class warrior:
         self.defense = int(self.cons / 2)
         self.life = self.cons * 6
         self.luck = randint(0, 3)
-        self.level = 5
+        self.level = 1
         self.xp = self.level * 20
         self.name = name
 
@@ -188,7 +213,7 @@ class mage:
         self.luck = randint(0, 3)
         self.life = self.cons * 5
         self.mana = self.intel * 6
-        self.level = 5
+        self.level = 1
         self.xp = self.level * 20
         self.name = name
 
@@ -244,6 +269,11 @@ class mage:
             elif self.input == 'f' or self.input == 'F':
                 self.mana -= 5
                 return int(freeze)
+
+    def mage_heal(self):
+        self.heal = self.intel / 2
+        self.mana -= 5
+        self.life += self.heal
 
 
     def attribute_print(self):

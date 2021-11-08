@@ -1,5 +1,6 @@
 from time import sleep
-from rpg_construction import combat
+from rpg_construction import combat_mage
+from rpg_construction import combat_non_magic
 
 
 from rpg_construction import warrior
@@ -84,14 +85,20 @@ def main():
             firstChar.attribute_print()
             sleep(0.5)
             pass
-
+    sleep(0.5)
     print('When your XP gets to 0, you will level up!')
     print('Now lets try a fight!')
     print()
     sleep(0.5)
-    combat(firstChar, beginner_monster)
+    combat_mage(firstChar, beginner_monster)
+    print()
+    print('This was your first fight just for you to see that leveling is possible!')
     firstChar.attribute_print()
     print()
+    print('Attribute upgrades, pretty cool right?')
+    print('Now its time to begin our story!')
+    print()
+    print('=' * 100)
     print('Now lets equip you something!')
     if firstChar.job == 'warrior':
         basic_sword(firstChar)
