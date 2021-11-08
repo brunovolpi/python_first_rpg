@@ -90,6 +90,7 @@ def main():
     print('Now lets try a fight!')
     print()
     sleep(0.5)
+    #combat_non_magic(firstChar, beginner_monster)
     combat_mage(firstChar, beginner_monster)
     print()
     print('This was your first fight just for you to see that leveling is possible!')

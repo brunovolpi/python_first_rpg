@@ -1,53 +1,66 @@
 from random import randint
 from weapons import basic_sword
-#time to make one class for each job
+from time import sleep
 
 def combat_non_magic(character, monster):
+    print('=' * 50)
+    print('=' * 18, 'Combat time!', '=' * 18)
+    print('=' * 50)
     while character.life > 0 and monster.life > 0:
         print()
         monster.life -= character.attack() + monster.defense
         print()
         print(f'\nHit: {character.damage}'
               f'\nMonster HP: {monster.life}')
+        print()
+        sleep(0.5)
         if monster.life > 0:
             character.life -= monster.damage + character.defense
             print(f'Taken: {monster.damage}'
                   f'\nHP: {character.life}')
+            print()
+            sleep(0.5)
             if character.life <= 0:
                 print('You are dead!')
                 break
         elif monster.life <= 0:
             print('The monster is now dead...')
-            pass
             character.xp -= monster.xp
             print(f'You gained: {monster.xp} XP')
             if character.xp <= 0:
                 character.level_up()
                 print()
 
+
+#right now im trying to add the Healing Skill which appears after reaching lvl 5
+#But i don't know how to use the skill and maintain the combat prints indicating the combat numbers
+#So far only the non_magic classes are corresponding the fighting print sequences
 def combat_mage(character, monster):
     print('=' * 50)
     print('=' * 18, 'Combat time!', '=' * 18)
     print('=' * 50)
     while character.life > 0 and monster.life > 0:
-        if character.attack() == 'h' or character.attack() == 'H':
-            character.life += character.attack()
+        if character.level >= 5:
+
+            character.mage_heal()
+            sleep(0.5)
         else:
             print()
             monster.life -= character.attack() + monster.defense
             print()
-            print(f'\nHit: {character.damage}'
+            print(f'Hit: {character.damage}'
                   f'\nMonster HP: {monster.life}')
+            sleep(0.5)
             if monster.life > 0:
                 character.life -= monster.damage + character.defense
                 print(f'Taken: {monster.damage}'
                       f'\nHP: {character.life}')
+                sleep(0.5)
                 if character.life <= 0:
                     print('You are dead!')
                     break
             elif monster.life <= 0:
                 print('The monster is now dead...')
-                pass
                 character.xp -= monster.xp
                 print(f'You gained: {monster.xp} XP')
                 if character.xp <= 0:
@@ -213,7 +226,7 @@ class mage:
         self.luck = randint(0, 3)
         self.life = self.cons * 5
         self.mana = self.intel * 6
-        self.level = 1
+        self.level = 5
         self.xp = self.level * 20
         self.name = name
 
@@ -274,6 +287,7 @@ class mage:
         self.heal = self.intel / 2
         self.mana -= 5
         self.life += self.heal
+        print(f'Healed: {self.heal}')
 
 
     def attribute_print(self):
