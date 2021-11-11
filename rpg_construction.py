@@ -2,6 +2,32 @@ from random import randint
 from weapons import basic_sword
 from time import sleep
 
+def final_mage_combat(character, monster):
+    print('=' * 30)
+    print('======= Combat mode! =======')
+    print('=' * 30)
+    while character.life > 0 and monster.life > 0:
+        if character.level < 5:
+            combat_style = input('Melee: [m/M]'
+                  '\nOffence Spells: [os/OS]')
+            if combat_style == 'm' or combat_style == 'M':
+                kick_chance = character.melee_mode()
+                if kick_chance == 'Miss!':
+                    return True
+                pass #idk how to pass trough 'Miss!' and keep printing the battle status.
+                monster.life -= character.melee_mode()
+                print(f'Monster Life: {monster.life}')
+            if monster.life > 0:
+                character.life - monster.damage
+                print(f'Monster Damage: {monster.damage}'
+                      f'\nHP: {character.life}')
+            else:
+                print('You killed the monster!')
+                print(f'XP gained: {monster.xp}')
+                character.xp - monster.xp
+
+
+
 def combat_non_magic(character, monster):
     print('=' * 50)
     print('=' * 18, 'Combat time!', '=' * 18)
@@ -225,7 +251,7 @@ class mage:
         self.luck = randint(0, 3)
         self.life = self.cons * 5
         self.mana = self.intel * 6
-        self.level = 5
+        self.level = 1
         self.xp = self.level * 20
         self.name = name
 
@@ -257,55 +283,33 @@ class mage:
             print(f'Healed: {heal}'
                   f'\nHP: {self.life}')
 
+    def melee_mode(self):
+        self.damage = self.stre * 1.5
+        punch = self.damage * 1.1
+        kick = self.damage * 1.2
+        self.input = input('Kick: [k/K]'
+                           '\nPunch: [p/P]')
+        if self.input == 'k' or self.input == 'K':
+            kick_chance = randint(0, 10)
+            if kick_chance >= 3:
+                return int(kick)
+                print(f'Damage: {kick}')
+            else:
+                print('Miss!')
+        elif self.input == 'p' or self.input == 'P':
+            return int(punch)
+
+
+
+
 #if answer == 'offense_spells':
     #ride to offense_spells damage
 #elif answer == 'defence_spells':
     #ride to defence_spells self-healing
 
-def new_mage_combat(character, monster):
-    while character.life > 0 and monster.life > 0:
-        if character.level < 5:
-
     #heal spell solution: choose between offence and defence magic
 #theres another problem: how can i spare code lines when a new skill is reached?
-    def melee(self):
-        self.damage = self.stre * 1.5
-        punch = self.damage * 1.1
-        kick = self.damage * 1.2
-        if self.level >= 5:
-            self.input = input('Offence Spells: [z/Z]'
-                               '\nDefence Spells: [x/X]')
-            if self.input == 'z' or self.input == 'Z':
-                mage.offence_spells()
-            elif self.input == 'x' or self.input == 'x':
-                mage.defence_spells()
-            elif self.input == 'k' or self.input == 'K':
-                return int(kick)
-            elif self.input == 'b' or self.input == 'B':
-                self.mana -= 5
-                return int(burn)
-            elif self.input == 'f' or self.input == 'F':
-                self.mana -= 5
-                return int(freeze)
-            elif self.input == 'h' or self.input == 'H':
-                self.mana -= 5
-                self.life += heal
-                print(f'Healed: {heal}')
-        elif self.level < 5:
-            self.input = input('Kick: [k/K]'
-                               '\nPunch: [p/P]'
-                               '\nBurn: (-5 mana): [b/B]'
-                               '\nFreeze: (-5 mana): [f/F]')
-            if self.input == 'p' or self.input == 'P':
-                return int(punch)
-            elif self.input == 'k' or self.input == 'K':
-                return int(kick)
-            elif self.input == 'b' or self.input == 'B':
-                self.mana -= 5
-                return int(burn)
-            elif self.input == 'f' or self.input == 'F':
-                self.mana -= 5
-                return int(freeze)
+
 
 
     def attack(self):

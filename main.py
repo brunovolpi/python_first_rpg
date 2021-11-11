@@ -1,7 +1,5 @@
 from time import sleep
-from rpg_construction import combat_mage
-from rpg_construction import combat_non_magic
-
+from rpg_construction import final_mage_combat
 
 from rpg_construction import warrior
 from rpg_construction import mage
@@ -91,7 +89,7 @@ def main():
     print()
     sleep(0.5)
     #combat_non_magic(firstChar, beginner_monster)
-    combat_mage(firstChar, beginner_monster)
+    final_mage_combat(firstChar, beginner_monster)
     print()
     print('This was your first fight just for you to see that leveling is possible!')
     firstChar.attribute_print()
