@@ -41,7 +41,6 @@ def combat_mage(character, monster):
     print('=' * 50)
     while character.life > 0 and monster.life > 0:
         if character.level >= 5:
-
             character.mage_heal()
             sleep(0.5)
         else:
@@ -238,6 +237,76 @@ class mage:
         self.dex += 1
         self.xp = self.level * 20
         self.level += 1
+
+    def offence_spells(self):
+        self.magic_damage = self.intel * 1.5
+        burn = self.magic_damage * 1.5
+        freeze = self.magic_damage * 1.5
+        self.input = input('Burn: [b/B]'
+                           '\nFreeze: [f/F]')
+        if self.input == 'b' or self.input == 'B':
+            return int(burn)
+        elif self.input == 'f' or self.input == 'F':
+            return int(freeze)
+
+    def defence_spells(self):
+        heal = int(self.intel / 2)
+        self.input = input('Heal: [h/H]')
+        if self.input == 'h' or self.input == 'H':
+            self.life += heal
+            print(f'Healed: {heal}'
+                  f'\nHP: {self.life}')
+
+#if answer == 'offense_spells':
+    #ride to offense_spells damage
+#elif answer == 'defence_spells':
+    #ride to defence_spells self-healing
+
+def new_mage_combat(character, monster):
+    while character.life > 0 and monster.life > 0:
+        if character.level < 5:
+
+    #heal spell solution: choose between offence and defence magic
+#theres another problem: how can i spare code lines when a new skill is reached?
+    def melee(self):
+        self.damage = self.stre * 1.5
+        punch = self.damage * 1.1
+        kick = self.damage * 1.2
+        if self.level >= 5:
+            self.input = input('Offence Spells: [z/Z]'
+                               '\nDefence Spells: [x/X]')
+            if self.input == 'z' or self.input == 'Z':
+                mage.offence_spells()
+            elif self.input == 'x' or self.input == 'x':
+                mage.defence_spells()
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 'b' or self.input == 'B':
+                self.mana -= 5
+                return int(burn)
+            elif self.input == 'f' or self.input == 'F':
+                self.mana -= 5
+                return int(freeze)
+            elif self.input == 'h' or self.input == 'H':
+                self.mana -= 5
+                self.life += heal
+                print(f'Healed: {heal}')
+        elif self.level < 5:
+            self.input = input('Kick: [k/K]'
+                               '\nPunch: [p/P]'
+                               '\nBurn: (-5 mana): [b/B]'
+                               '\nFreeze: (-5 mana): [f/F]')
+            if self.input == 'p' or self.input == 'P':
+                return int(punch)
+            elif self.input == 'k' or self.input == 'K':
+                return int(kick)
+            elif self.input == 'b' or self.input == 'B':
+                self.mana -= 5
+                return int(burn)
+            elif self.input == 'f' or self.input == 'F':
+                self.mana -= 5
+                return int(freeze)
+
 
     def attack(self):
         self.damage = self.stre * 1.5
