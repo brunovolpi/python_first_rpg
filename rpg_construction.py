@@ -4,28 +4,40 @@ from time import sleep
 
 def final_mage_combat(character, monster):
     print('=' * 30)
-    print('======= Combat mode! =======')
+    print('======= Combat X Mode! =======')
     print('=' * 30)
     while character.life > 0 and monster.life > 0:
         if character.level < 5:
             combat_style = input('Melee: [m/M]'
                   '\nOffence Spells: [os/OS]')
             if combat_style == 'm' or combat_style == 'M':
-                kick_chance = character.melee_mode()
-                if kick_chance == 'Miss!':
-                    return True
-                pass #idk how to pass trough 'Miss!' and keep printing the battle status.
                 monster.life -= character.melee_mode()
-                print(f'Monster Life: {monster.life}')
-            if monster.life > 0:
-                character.life - monster.damage
-                print(f'Monster Damage: {monster.damage}'
-                      f'\nHP: {character.life}')
-            else:
-                print('You killed the monster!')
-                print(f'XP gained: {monster.xp}')
-                character.xp - monster.xp
-
+                print(f'Monster life: {monster.life}'
+                      f'\n')
+                if monster.life > 0:
+                    character.life -= monster.damage
+                    print(f'Monster Damage: {monster.damage}'
+                          f'\nHP: {character.life}')
+                    if character.life <= 0:
+                        print('You died!')
+                elif monster.life <= 0:
+                    print('You killed the monster!')
+                    print(f'XP gained: {monster.xp}')
+                    character.xp -= monster.xp
+            if combat_style == 'os' or combat_style == 'OS':
+                monster.life -= character.offence_spells()
+                print(f'Monster life: {monster.life}'
+                      f'\n')
+                if monster.life > 0:
+                    character.life -= monster.damage
+                    print(f'Monster Damage: {monster.damage}'
+                          f'\nHP: {character.life}')
+                    if character.life <= 0:
+                        print('You died!')
+                elif monster.life <= 0:
+                    print('You killed the monster!')
+                    print(f'XP gained: {monster.xp}')
+                    character.xp -= monster.xp
 
 
 def combat_non_magic(character, monster):
@@ -271,8 +283,10 @@ class mage:
         self.input = input('Burn: [b/B]'
                            '\nFreeze: [f/F]')
         if self.input == 'b' or self.input == 'B':
+            print(f'Damage: {burn}')
             return int(burn)
         elif self.input == 'f' or self.input == 'F':
+            print(f'Damage: {freeze}')
             return int(freeze)
 
     def defence_spells(self):
@@ -290,13 +304,10 @@ class mage:
         self.input = input('Kick: [k/K]'
                            '\nPunch: [p/P]')
         if self.input == 'k' or self.input == 'K':
-            kick_chance = randint(0, 10)
-            if kick_chance >= 3:
-                return int(kick)
-                print(f'Damage: {kick}')
-            else:
-                print('Miss!')
+            print(f'Damage: {int(kick)}')
+            return int(kick)
         elif self.input == 'p' or self.input == 'P':
+            print(f'Damage: {int(punch)}')
             return int(punch)
 
 
