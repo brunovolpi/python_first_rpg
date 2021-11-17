@@ -37,3 +37,4 @@ def combat(character, monster):
                 character.xp -= monster.xp
                 if character.xp <= 0:
                     character.level_up()
+                    #comentário aleatório
