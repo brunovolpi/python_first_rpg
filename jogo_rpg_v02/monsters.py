@@ -51,19 +51,19 @@ class noob:
         self.damage += 2
         self.life += 10
         self.defence += 1
-        self.xp += 26 #(2+10+1)*2 = 26
+        self.xp += 260 #(2+10+1)*2 = 26
 
     def medium(self):
         self.damage += 3
         self.life += 12
         self.defence += 1
-        self.xp += 32
+        self.xp += 320
 
     def hard(self):
         self.damage += 4
         self.life += 15
         self.defence += 2
-        self.xp += 42
+        self.xp += 420
 
 
 class medium:

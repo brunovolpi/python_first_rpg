@@ -1,5 +1,16 @@
 from random import randint
 
+def job_choice():
+    name = input('Whats your name?')
+    character = input('Choose your class!'
+                      '\nWarrior: [w/W]'
+                      '\nMage: [m/M]'
+                      '\nArcher: [a/A]')
+    if character == 'w' or character == 'W':
+        character = warrior(name)
+        print('You are now a Warrior!')
+        return character
+
 class warrior:
     def __init__(self, name):
         self.name = name
@@ -12,6 +23,42 @@ class warrior:
         self.luck = randint(0, 3)
         self.level = 0
         self.xp = self.level * 20
+
+    def skill_upgrade(self):
+        skill_choice = input('Congratulations! You are now lvl 10!'
+                             '\nIts time to choose a skill to upgrade:'
+                             '\nKick: [k/K]'
+                             '\nPunch: [p/P]'
+                             '\nRumble: [r/R]')
+        if skill_choice == 'k' or skill_choice == 'K':
+            modifier_choice = input('You have upgraded your Kick skill!'
+                  '\nNow into your skill can be attached a modifier!'
+                  '\n'
+                  '\nChoose a modifier for the skill: '
+                                   '\nCritical Chance (20%): [cc/CC]'
+                                   '\nDamage Increase (+40%): [di/DI]')
+            if modifier_choice == 'cc' or modifier_choice == 'CC':
+                print('Now Kick attack has 20% critical chance (3x damage)!')
+                critical_chance = randint(0, 100)
+                if critical_chance <= 20:
+                    self.kick = (self.stre * 2) * 3
+            elif modifier_choice == 'di' or modifier_choice == 'DI':
+                print('Now Kick attack has +40% damage!')
+                self.kick = (self.stre * 2) + (self.stre * 0.4)
+        if skill_choice == 'p' or skill_choice == 'P':
+            modifier_choice = input('You have upgraded your Punch skill!'
+                                    '\nNow into your skill can be attached a modifier!'
+                                    '\n'
+                                    '\nChoose a modifier for the skill: '
+                                    '\nDouble Punch chance! (30%): [dp/DP]'
+                                    '\nDamage + Dodge chance! (+20%): [dd/DD]')
+            if modifier_choice == 'dp' or modifier_choice == 'DP':
+                print('Now your Punch attack has 30% of double damage!')
+                double_damage_chance = randint(0, 100)
+                if double_damage_chance <= 30:
+                    self.punch = (self.stre * 1.5) * 2
+                else:
+                    self.punch = self.stre * 1.5
 
     def skill_attack(self):
         self.kick = self.stre * 2 #Chance to miss
@@ -29,8 +76,11 @@ class warrior:
             return int(self.rumble)
 
     def level_up(self): #10 points
+        self.level += 1
         self.stre += 2
         self.con += 2
+        if self.level >= 10:
+            self.skill_upgrade()
         remaining_points = 6
         point_distribution = input(f'You leveled up!'
                                     f'\n10 points gained, 4 points are obligatory to strenght and constitution for Warrior job'
@@ -113,8 +163,12 @@ class warrior:
                                     f'\nLuck: [l/L] - Overall Luck - 1 cost')
                 else:
                     print('No more points to distribute!')
+                    if self.level >= 10:
+                        self.skill_upgrade()
+
     def att_print(self):
-        print(f'Life: {self.life}')
+        print(f'Life: {self.life}'
+              f'\nLevel: {self.level}')
 
 class mage:
     def __init__(self, name):
