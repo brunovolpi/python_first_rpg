@@ -46,23 +46,33 @@ class noob:
         self.damage = self.stre * 2
         self.con = 0
         self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
         self.defence = self.con
         self.xp = int((self.stre + self.con + (self.defence / 2))) * 2
 
 
     def easy(self):
         self.stre += 1
+        self.damage = self.stre * 2
         self.con += 3
+        self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
         print('an easy one!')
 
     def medium(self):
         self.stre += 3
+        self.damage = self.stre * 2
         self.con += 5
+        self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
         self.xp *= 1.1
 
     def hard(self):
         self.stre += 5
+        self.damage = self.stre * 2
         self.con += 8
+        self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
         self.xp *= 1.3
 
 
@@ -77,14 +87,23 @@ class medium:
 
     def easy(self):
         self.stre += 3
+        self.damage = self.stre * 2
         self.con += 8
+        self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
 
     def medium(self):
         self.stre += 6
+        self.damage = self.stre * 2
         self.con += 10
+        self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
         self.xp *= 1.1
 
     def hard(self):
         self.stre += 8
+        self.damage = self.stre * 2
         self.con += 11
+        self.life = (self.con * 3) + 1
+        self.max_life = (self.con * 3) + 1
         self.xp *= 1.3

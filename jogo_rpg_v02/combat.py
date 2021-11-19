@@ -11,7 +11,7 @@ def combat(character, monster):
                     pass
                 elif status == 's' or status == 'S':
                     print(f'===== Monster ====='
-                          f'\nHP: {monster.life}'
+                          f'\nHP: {monster.max_life}/{monster.life}'
                           f'\n===== Player ====='
                           f'\nHP: {character.life}')
                 else:
@@ -22,7 +22,7 @@ def combat(character, monster):
             print()
             print(f'===== Monster ====='
                   f'\nSkill damage: {damage}'
-                  f'\nMonster HP: {monster.life}'
+                  f'\nMonster HP: {monster.max_life}/{monster.life}'
                   f'\n===================')
             if monster.life > 0:
                 damage = monster.damage
@@ -30,7 +30,7 @@ def combat(character, monster):
                 print()
                 print(f'===== Player ====='
                       f'\nMonster damage: {damage}'
-                      f'\n{character.name} HP: {character.max_life} / {character.life}'
+                      f'\n{character.name} HP: {character.max_life}/{character.life}'
                       f'\n==================')
             else:
                 print()
