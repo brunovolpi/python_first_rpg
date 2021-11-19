@@ -42,54 +42,49 @@ def combat_difficult(grade_level):
 
 class noob:
     def __init__(self):
-        self.damage = 0
-        self.life = 0
-        self.defence = 0
-        self.xp = 0
+        self.stre = 0
+        self.damage = self.stre * 2
+        self.con = 0
+        self.life = (self.con * 3) + 1
+        self.defence = self.con
+        self.xp = int((self.stre + self.con + (self.defence / 2))) * 2
+
 
     def easy(self):
-        self.damage += 2
-        self.life += 10
-        self.defence += 1
-        self.xp += 260 #(2+10+1)*2 = 26
+        self.stre += 1
+        self.con += 3
+        print('an easy one!')
 
     def medium(self):
-        self.damage += 3
-        self.life += 12
-        self.defence += 1
-        self.xp += 320
+        self.stre += 3
+        self.con += 5
+        self.xp *= 1.1
 
     def hard(self):
-        self.damage += 4
-        self.life += 15
-        self.defence += 2
-        self.xp += 420
+        self.stre += 5
+        self.con += 8
+        self.xp *= 1.3
 
 
 class medium:
-    global difficult
-    difficult = randint(0, 10)
-
     def __init__(self):
-        self.damage = 0
-        self.life = 0
-        self.defence = 0
-        self.xp = 0
+        self.stre = 0
+        self.damage = self.stre * 2
+        self.con = 0
+        self.life = self.con * 3
+        self.defence = self.con
+        self.xp = int((self.stre + self.con + (self.defence / 2))) * 2
 
     def easy(self):
-        self.damage += 5
-        self.life += 15
-        self.defence += 4
-        self.xp += 48
+        self.stre += 3
+        self.con += 8
 
     def medium(self):
-        self.damage += 7
-        self.life += 20
-        self.defence += 4
-        self.xp += 62
+        self.stre += 6
+        self.con += 10
+        self.xp *= 1.1
 
     def hard(self):
-        self.damage += 10
-        self.life += 30
-        self.defence += 6
-        self.xp += 92
+        self.stre += 8
+        self.con += 11
+        self.xp *= 1.3
