@@ -30,13 +30,16 @@ class warrior:
         self.luck = randint(0, 3)
         self.level = 0
         self.xp = self.level * 20
+        self.special_skill = 0
 
     def skill_upgrade_warrior(self):
+        self.special_skill += 1
         skill_choice = input('Congratulations! You are now lvl 10!'
+                             '\nThat means you gained +1 Special Skill point!'
                              '\nIts time to choose a skill to upgrade:'
-                             '\nKick: [k/K]'
-                             '\nPunch: [p/P]'
-                             '\nRumble: [r/R]')
+                             '\nKick: [k/K] (20% Critical chance /OR/ +40% Damage Increase)'
+                             '\nPunch: [p/P] (30% Double Punch chance /OR/ 20% Dodge chance)'
+                             '\nRumble: [r/R] (25% Stun chance /OR/ 10% Combo chance)')
         if skill_choice == 'k' or skill_choice == 'K':
             modifier_choice = input('You have upgraded your Kick skill!'
                   '\nNow into your skill can be attached a modifier!'
@@ -45,11 +48,13 @@ class warrior:
                                    '\nCritical Chance (20%): [cc/CC]'
                                    '\nDamage Increase (+40%): [di/DI]')
             if modifier_choice == 'cc' or modifier_choice == 'CC':
+                self.special_skill -= 1
                 print('Now Kick attack has 20% critical chance (3x damage)!')
                 critical_chance = randint(0, 100)
                 if critical_chance <= 20:
                     self.kick = (self.stre * 2) * 3
             elif modifier_choice == 'di' or modifier_choice == 'DI':
+                self.special_skill -= 1
                 print('Now Kick attack has +40% damage!')
                 self.kick = (self.stre * 2) + (self.stre * 0.4)
         if skill_choice == 'p' or skill_choice == 'P':
@@ -60,15 +65,78 @@ class warrior:
                                     '\nDouble Punch chance! (30%): [dp/DP]'
                                     '\nDamage + Dodge chance! (+20%): [dd/DD]')
             if modifier_choice == 'dp' or modifier_choice == 'DP':
+                self.special_skill -= 1
                 print('Now your Punch attack has 30% of double damage!')
                 double_damage_chance = randint(0, 100)
                 if double_damage_chance <= 30:
                     self.punch = (self.stre * 1.5) * 2
                 else:
+                    self.special_skill -= 1
                     self.punch = self.stre * 1.5
+        if skill_choice == 'r' or skill_choice == 'R':
+            modifier_choice = input('You have upgraded your Rumble skill!'
+                                    '\nNow into your skill can be attached a modifier!'
+                                    '\n'
+                                    '\nChoose a modifier for the skill:'
+                                    '\nStun chance! (25%): [s/S]'
+                                    '\nCombo chance! (10%): [c/C]')
+            if modifier_choice == 's' or modifier_choice == 'S':
+                self.special_skill -= 1
+                print('Now your Rumble attack has 25% stun chance!')
+                stun_chance = randint(0, 100)
+               # if stun_chance <= 25:
+                #    self.rumble
+
+    def stored_special_points(self):
+        self.special_points = 0
+
+    def kick_attack(self):
+        self.kick = self.stre * 1.5
+
+    def skill_modifier(self):
+        skill_choice = input('Congratulations! You are now lvl 10!'
+                             '\nThat means you gained +1 Special Skill point!'
+                             '\nIts time to choose a skill to upgrade:'
+                             '\nKick: [k/K] (20% Critical chance /OR/ +40% Damage Increase)'
+                             '\nPunch: [p/P] (30% Double Punch chance /OR/ 20% Dodge chance)'
+                             '\nRumble: [r/R] (25% Stun chance /OR/ 10% Combo chance)')
+        if skill_choice == 'k' or skill_choice == 'K':
+            self.kick_modifier()
+        while skill_choice != 'k' and skill_choice != 'K' and skill_choice != 'p' and skill_choice != 'P' and skill_choice != 'r' and skill_choice != 'R':
+            skill_choice = input('Try again!'
+                                 '\nKick: [k/K] (20% Critical chance /OR/ +40% Damage Increase)'
+                                 '\nPunch: [p/P] (30% Double Punch chance /OR/ 20% Dodge chance)'
+                                 '\nRumble: [r/R] (25% Stun chance /OR/ 10% Combo chance)')
+
+            if skill_choice == 'k' or skill_choice == 'K':
+                self.kick_modifier()
+
+    def kick_modifier(self):
+        skill_choice = input('Your choice is the Kick skill!'
+                                '\nNow into your skill can be attached a modifier!'
+                                '\n'
+                                '\nChoose a modifier for the skill: '
+                                '\nCritical Chance (20%): [cc/CC]'
+                                '\nDamage Increase (+40%): [di/DI]')
+        if skill_choice == 'cc' or skill_choice == 'CC':
+            self.special_skill -= 1
+            print('Now Kick attack has 20% critical chance (3x damage)!')
+
+
+    def kick_attack(self):
+        self.kick = self.stre * 1.5
+
+
+        critical_chance = randint(0, 100)
+        if critical_chance <= 20:
+            self.kick = (self.stre * 1.5) * 3
+            return int(self.kick)
+        else:
+            self.kick = self.stre * 1.5
+            return int(self.kick)
 
     def skill_attack(self):
-        self.kick = self.stre * 2 #Chance to miss
+        self.kick_modifier() #Chance to miss
         self.punch = self.stre * 1.5
         self.rumble = self.stre * 2 #-1 HP
         skill_use = input('Choose your movement!'
@@ -82,19 +150,23 @@ class warrior:
                 print('Kick attack has missed!')
                 return 0
             else:
-                return int(self.kick)
+                return int(self.kick_modifier())
         elif skill_use == 'p' or skill_use == 'P':
             return int(self.punch)
         elif skill_use == 'r' or skill_use == 'R':
             self.life -= 1
             return int(self.rumble)
 
+
+
+                        ###################### LEVEL UP #######################
+
     def level_up(self): #10 points
         self.level += 1
         self.stre += 2
         self.con += 2
-        if self.level >= 10:
-            self.skill_upgrade()
+        if self.level % 10 == 0:
+            self.skill_upgrade_warrior()
         remaining_points = 6
         point_distribution = input(f'You leveled up!'
                                     f'\n10 points gained, 4 points are obligatory to strenght and constitution for Warrior job'
@@ -178,7 +250,7 @@ class warrior:
                 else:
                     print('No more points to distribute!')
                     if self.level >= 10:
-                        self.skill_upgrade()
+                        self.skill_upgrade_warrior()
 
     def att_print(self):
         print(f'Life: {self.life}'
@@ -198,6 +270,7 @@ class mage:
         self.level = 0
         self.xp = self.level * 20
         self.job = 'mage'
+        self.special_skill = 0
 
     def melee_moves(self):
         self.kick = self.stre * 2  # Chance to miss
@@ -385,3 +458,4 @@ class mage:
                     self.punch = (self.stre * 1.5) * 2
                 else:
                     self.punch = self.stre * 1.5
+        if skill_choice == ''
