@@ -1,5 +1,18 @@
 from random import randint
 
+def role_start():
+    name = input('Tell me how do you want to bel called:')
+    print()
+    choice = input('Pick up a role:'
+                   '\nWarrior: [w/W]')
+    if choice == 'w' or choice == 'W':
+        character = warrior(name)
+        return character
+    else:
+        while choice != 'w' and choice != 'W':
+            choice = input('Try again:'
+                           '\nWarrior: [w/W]')
+
 #a big fat __init__ so a newbie coder can call his attributes all around, sorry for that
 class warrior:
     def __init__(self, name):
@@ -23,7 +36,7 @@ class warrior:
 
 #some character vision
     def print_stats(self):
-        print(f'Name: {self.name}'
+        print(f'\nName: {self.name}'
               f'\nJob: {self.job}'
               f'\n'
               f'\n=== Stats ==='
@@ -81,7 +94,8 @@ class warrior:
         self.life -= 1
         return int(self.rumble)
 
-                        ###################### LEVEL UP SYSTEM ######################
+                        ###################### LEVEL UP ######################
+
     def level_up(self):  # 10 points
         self.level += 1
         self.stre += 2
@@ -171,7 +185,7 @@ class warrior:
                 else:
                     print('No more points to distribute!')
 
-                        ###################### JOB UPGRADE SYSTEM ######################
+                        ###################### JOB UPGRADE ######################
 
     def job_upgrade(self):
         print(f'Congratulations once again, {self.name}!'
@@ -195,16 +209,270 @@ class warrior:
             self.con += 3
             self.intel += 2
             self.job = 'paladin'
+            remaining_points = 15
+            point_distribution = input(f'You changed your role!'
+                                       f'\n20 points gained, 5 points are obligatory to Constitution and Intelligence for Paladin role'
+                                       f'\n15 points remainig to distribute:'
+                                       f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                       f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                       f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                       f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                       f'\nLuck: [l/L] - Overall Luck - 1 cost')
+            while remaining_points > 0:
+                if point_distribution == 'i' or point_distribution == 'I':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.intel += point_quantity
+                    print(f'You invested {point_quantity} points in Intelligence attribute!'
+                          f'\nYour actual Intelligence is: {self.intel}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
+                elif point_distribution == 'd' or point_distribution == 'D':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.dex += point_quantity
+                    print(f'You invested {point_quantity} points in Dexterity attribute!'
+                          f'\nYour actual Dexterity is: {self.dex}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
+                elif point_distribution == 'l' or point_distribution == 'L':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.luck += point_quantity
+                    print(f'You invested {point_quantity} points in Luck attribute!'
+                          f'\nYour actual Luck is: {self.luck}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                elif point_distribution == 's' or point_distribution == 'S':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.stre += point_quantity
+                    print(f'You invested {point_quantity} points in Strenght attribute!'
+                          f'\nYour actual Strenght is: {self.stre}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                elif point_distribution == 'c' or point_distribution == 'C':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.con += point_quantity
+                    print(f'You invested {point_quantity} points in Constitution attribute!'
+                          f'\nYour actual Constitution is: {self.con}'
+                          f'\nYour Health is now: {self.life}')  # this number returns badly idk why... for now.
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
         elif role_choice == 'b' or role_choice == 'B':
             print('You are now a Brute, prepare for a stat boost!')
+            self.con += 2
+            self.stre += 3
+            self.job = 'brute'
+            remaining_points = 15
+            point_distribution = input(f'You changed your role!'
+                                       f'\n20 points gained, 5 points are obligatory to Strenght and Constitution for Brute role'
+                                       f'\n15 points remainig to distribute:'
+                                       f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                       f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                       f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                       f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                       f'\nLuck: [l/L] - Overall Luck - 1 cost')
+            while remaining_points > 0:
+                if point_distribution == 'i' or point_distribution == 'I':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.intel += point_quantity
+                    print(f'You invested {point_quantity} points in Intelligence attribute!'
+                          f'\nYour actual Intelligence is: {self.intel}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
+                elif point_distribution == 'd' or point_distribution == 'D':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.dex += point_quantity
+                    print(f'You invested {point_quantity} points in Dexterity attribute!'
+                          f'\nYour actual Dexterity is: {self.dex}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
+                elif point_distribution == 'l' or point_distribution == 'L':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.luck += point_quantity
+                    print(f'You invested {point_quantity} points in Luck attribute!'
+                          f'\nYour actual Luck is: {self.luck}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                elif point_distribution == 's' or point_distribution == 'S':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.stre += point_quantity
+                    print(f'You invested {point_quantity} points in Strenght attribute!'
+                          f'\nYour actual Strenght is: {self.stre}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                elif point_distribution == 'c' or point_distribution == 'C':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.con += point_quantity
+                    print(f'You invested {point_quantity} points in Constitution attribute!'
+                          f'\nYour actual Constitution is: {self.con}'
+                          f'\nYour Health is now: {self.life}')  # this number returns badly idk why... for now.
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
             #print stats and define bonus
             self.job = 'brute'
         elif  role_choice == 'm' or role_choice == 'M':
             print('You are now a Brute, prepare for a stat boost!')
-            # print stats and define bonus
+            self.stre += 3
+            self.dex += 2
+            self.job = 'mongrel'
+            remaining_points = 15
+            point_distribution = input(f'You changed your role!'
+                                       f'\n20 points gained, 5 points are obligatory to Strenght and Dexterity for Mongrel role'
+                                       f'\n15 points remainig to distribute:'
+                                       f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                       f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                       f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                       f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                       f'\nLuck: [l/L] - Overall Luck - 1 cost')
+            while remaining_points > 0:
+                if point_distribution == 'i' or point_distribution == 'I':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.intel += point_quantity
+                    print(f'You invested {point_quantity} points in Intelligence attribute!'
+                          f'\nYour actual Intelligence is: {self.intel}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
+                elif point_distribution == 'd' or point_distribution == 'D':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.dex += point_quantity
+                    print(f'You invested {point_quantity} points in Dexterity attribute!'
+                          f'\nYour actual Dexterity is: {self.dex}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
+                elif point_distribution == 'l' or point_distribution == 'L':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.luck += point_quantity
+                    print(f'You invested {point_quantity} points in Luck attribute!'
+                          f'\nYour actual Luck is: {self.luck}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                elif point_distribution == 's' or point_distribution == 'S':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.stre += point_quantity
+                    print(f'You invested {point_quantity} points in Strenght attribute!'
+                          f'\nYour actual Strenght is: {self.stre}')
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                elif point_distribution == 'c' or point_distribution == 'C':
+                    point_quantity = int(input('Insert how many points you want in this attribute: '))
+                    remaining_points -= point_quantity
+                    self.con += point_quantity
+                    print(f'You invested {point_quantity} points in Constitution attribute!'
+                          f'\nYour actual Constitution is: {self.con}'
+                          f'\nYour Health is now: {self.life}')  # this number returns badly idk why... for now.
+                    if remaining_points > 0:
+                        point_distribution = input(f'\n{remaining_points} points remainig to distribute:'
+                                                   f'\nStrenght: [s/S] - Melee Damage - 1 cost'
+                                                   f'\nConstitution: [c/C] - Life and Defence - 1 cost'
+                                                   f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
+                                                   f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
+                                                   f'\nLuck: [l/L] - Overall Luck - 1 cost')
+                    else:
+                        print('No more points to distribute!')
             self.job = 'mongrel'
 
                         ###################### SKILL UPGRADE SYSTEM ######################
+
+                        ###################### SKILL UPGRADE ######################
+
     def skill_upgrade_warrior(self):
         self.special_skill += 1
         self.special_skill.append(0)
@@ -321,4 +589,5 @@ class warrior:
                                          '\nPunch: [p/P] (30% Double Punch chance /OR/ 20% Dodge chance)'
                                          '\nRumble: [r/R] (25% Stun chance /OR/ 10% Combo chance)')
         elif self.skill_lenght == 3:
+            self.job_upgrade()
 
