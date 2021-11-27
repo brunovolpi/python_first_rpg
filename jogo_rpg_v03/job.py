@@ -1,5 +1,8 @@
 from random import randint
 
+cat_jump = ['k', 'K', 'p', 'P', 'r', 'R']
+
+
 def role_start():
     name = input('Tell me how do you want to bel called:')
     print()
@@ -19,10 +22,12 @@ class warrior:
         self.name = name
         self.job = 'warrior'
         self.con = 5
+        self.defence = int(self.con / 3)
         self.life = self.con * 5
         self.max_life = self.con * 5
         self.stre = 3
         self.intel = 1
+        self.magic_defence = int((self.intel / 3) + (self.con / 5))
         self.dex = 2
         self.luck = randint(0, 3)
         self.level = 0
@@ -71,8 +76,8 @@ class warrior:
 # basic/upgraded punch attack
     def punch_attack(self):
         punch = self.stre * 1.5
-        chance = randint(0, 100)
         if self.special_punch == 1:
+            chance = randint(0, 100)
             if self.skill_modifier == 'dp' or self.skill_modifier == 'DP':
                 if chance <= 30:
                     print('Double Punch!')
@@ -88,13 +93,57 @@ class warrior:
         elif self.special_punch == 0:
             return int(punch)
 
-#yet to add the upgrade modifiers
     def rumble_attack(self):
         self.rumble = self.stre * 2
-        self.life -= 1
-        return int(self.rumble)
+        chance = randint(0,100)
+        impact = randint(1,3)
+        if self.special_rumble == 1:
+            if self.skill_modifier == 'dd' or self.skill_modifier == 'DD':
+                if chance <= 25:
+                    print('Double damage!')
+                    self.life -= 2
+                    return int(self.rumble * 2)
+                else:
+                    self.life -= 2
+                    return int(self.rumble)
+            elif self.skill_modifier == 'i' or self.skill_modifier == 'I':
+                if chance <= 10:
+                    print('Impact!')
+                    self.life -= 2
+                    return int(self.rumble) * impact
+        elif self.special_rumble == 0:
+            self.life -= 1
+            return int(self.rumble)
+
 
                         ###################### LEVEL UP ######################
+
+    def melee_attack(self):
+        character_choice = input('Kick: [k/K]'
+                                '\nPunch: [p/P]'
+                                '\nRumble: [r/R]'
+                                '\nReturn: [re/RE]')
+        if character_choice == 'k' or character_choice == 'K':
+            print('Kick attack!')
+            print('============')
+            self.kick_attack()
+        elif character_choice == 'p' or character_choice == 'P':
+            print('Punch attack!')
+            print('============')
+            self.punch_attack()
+        elif character_choice == 'r' or character_choice == 'R':
+            print('Rumble attack!')
+            print('============')
+            self.rumble_attack()
+        elif character_choice == 're' or character_choice == 'RE':
+            print('Returning to previous options')
+        else:
+            for i in cat_jump:
+                while i != cat_jump:
+                  character_choice = input('Sorry, try again!'
+                                           '\nPunch: [p/P]'
+                                           '\nRumble: [r/R]'
+                                           '\nReturn: [re/RE]')
 
     def level_up(self):  # 10 points
         self.level += 1
@@ -522,7 +571,7 @@ class warrior:
                                         '\n'
                                         '\nChoose a modifier for the skill:'
                                         '\nStun chance! (25%): [s/S]'
-                                        '\nCombo chance! (10%): [c/C]')
+                                        '\nDouble Damage chance! (25%): [dd/DD]')
                 if modifier_choice == 's' or modifier_choice == 'S':
                     self.special_skill -= 1
                     print('Now your Rumble attack has 25% stun chance!')
