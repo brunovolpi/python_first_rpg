@@ -1,6 +1,7 @@
 from random import randint
 
-cat_jump = ['k', 'K', 'p', 'P', 'r', 'R']
+cat_jump = ['k', 'K', 'p', 'P', 'r', 'R', 'c', 'C', 's', 'S', 're', 'RE', 'i', 'I', 'd', 'D', 'l', 'L', 'p', 'P',
+            'b', 'B', 'm', 'M', 'cc', 'CC', 'di', 'DI', 'dp', 'DP', 'tp', 'TP', 'dd', 'DD']
 
 
 def role_start():
@@ -11,10 +12,27 @@ def role_start():
     if choice == 'w' or choice == 'W':
         character = warrior(name)
         return character
+    elif choice == 'm' or choice == 'A':
+        character = warrior(name)
+        return character
+    elif choice == 'a' or choice == 'A':
+        character = warrior(name)
+        return character
     else:
         while choice != 'w' and choice != 'W':
             choice = input('Try again:'
-                           '\nWarrior: [w/W]')
+                           '\nWarrior: [w/W]'
+                           '\nMage: [m/M]'
+                           '\nArcher: [a/A]')
+            if choice == 'w' or choice == 'W':
+                character = warrior(name)
+                return character
+            elif choice == 'm' or choice == 'A':
+                character = warrior(name)
+                return character
+            elif choice == 'a' or choice == 'A':
+                character = warrior(name)
+                return character
 
 #a big fat __init__ so a newbie coder can call his attributes all around, sorry for that
 class warrior:
@@ -123,27 +141,29 @@ class warrior:
                                 '\nPunch: [p/P]'
                                 '\nRumble: [r/R]'
                                 '\nReturn: [re/RE]')
+        while character_choice not in cat_jump:
+            character_choice = input('\nInvalid option, try again!'
+                                     '\nPunch: [p/P]'
+                                     '\nRumble: [r/R]'
+                                     '\nReturn: [re/RE]')
+            if character_choice in cat_jump:
+                pass
         if character_choice == 'k' or character_choice == 'K':
             print('Kick attack!')
             print('============')
-            self.kick_attack()
+            return self.kick_attack()
         elif character_choice == 'p' or character_choice == 'P':
             print('Punch attack!')
             print('============')
-            self.punch_attack()
+            return self.punch_attack()
         elif character_choice == 'r' or character_choice == 'R':
             print('Rumble attack!')
             print('============')
-            self.rumble_attack()
+            return self.rumble_attack()
         elif character_choice == 're' or character_choice == 'RE':
             print('Returning to previous options')
-        else:
-            for i in cat_jump:
-                while i != cat_jump:
-                  character_choice = input('Sorry, try again!'
-                                           '\nPunch: [p/P]'
-                                           '\nRumble: [r/R]'
-                                           '\nReturn: [re/RE]')
+            return 0
+
 
     def level_up(self):  # 10 points
         self.level += 1
@@ -576,7 +596,7 @@ class warrior:
                     self.special_skill -= 1
                     print('Now your Rumble attack has 25% stun chance!')
             else:
-                while skill_choice != 'k' and skill_choice != 'K' and skill_choice != 'p' and skill_choice != 'P' and skill_choice != 'r' and skill_choice != 'R':
+                while skill_choice not in cat_jump:
                     skill_choice = input('Sorry, type again!'
                                          '\nKick: [k/K] (20% Critical chance /OR/ +40% Damage Increase)'
                                          '\nPunch: [p/P] (30% Double Punch chance /OR/ 20% Dodge chance)'

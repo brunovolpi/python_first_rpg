@@ -60,7 +60,6 @@ class noob:
         self.con += 3
         self.life = (self.con * 3)
         self.max_life = (self.con * 3)
-        print('an easy one!')
 
     def medium(self):
         self.stre += 3
