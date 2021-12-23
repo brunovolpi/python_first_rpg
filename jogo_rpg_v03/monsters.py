@@ -37,8 +37,6 @@ def combat_difficult(grade_level):
             print('A hard monster!')
             return monster
 
-
-
 class noob:
     def __init__(self):
         self.stre = 1

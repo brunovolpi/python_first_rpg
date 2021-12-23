@@ -3,36 +3,27 @@ from random import randint
 cat_jump = ['k', 'K', 'p', 'P', 'r', 'R', 'c', 'C', 's', 'S', 're', 'RE', 'i', 'I', 'd', 'D', 'l', 'L', 'p', 'P',
             'b', 'B', 'm', 'M', 'cc', 'CC', 'di', 'DI', 'dp', 'DP', 'tp', 'TP', 'dd', 'DD']
 
+list_role = ['w', 'W', 'a', 'A', 'm', 'M']
+list_levelup = ['i', 'I', 's', 'S', 'c', 'C', 'd', 'D', 'l', 'L']
+list_warrior_path = ['p', 'P', 'b', 'B', 'm', 'M']
 
 def role_start():
-    name = input('Tell me how do you want to bel called:')
+    name = input('Tell me how do you want to be called:')
     print()
-    choice = input('Pick up a role:'
+    choice = input(f'Pick up a role, {name}:'
                    '\nWarrior: [w/W]')
-    if choice == 'w' or choice == 'W':
+    while choice not in list_role:
+        choice = input(f'Not a valid option, {name}... Try again:'
+                       f'\nWarrior: [w/W]')
+    if choice in list_role[0:2]:
         character = warrior(name)
         return character
-    elif choice == 'm' or choice == 'A':
+    elif choice in list_role[2:4]:
         character = warrior(name)
         return character
-    elif choice == 'a' or choice == 'A':
+    elif choice in list_role[4:6]:
         character = warrior(name)
         return character
-    else:
-        while choice != 'w' and choice != 'W':
-            choice = input('Try again:'
-                           '\nWarrior: [w/W]'
-                           '\nMage: [m/M]'
-                           '\nArcher: [a/A]')
-            if choice == 'w' or choice == 'W':
-                character = warrior(name)
-                return character
-            elif choice == 'm' or choice == 'A':
-                character = warrior(name)
-                return character
-            elif choice == 'a' or choice == 'A':
-                character = warrior(name)
-                return character
 
 #a big fat __init__ so a newbie coder can call his attributes all around, sorry for that
 class warrior:
@@ -48,7 +39,7 @@ class warrior:
         self.magic_defence = int((self.intel / 3) + (self.con / 5))
         self.dex = 2
         self.luck = randint(0, 3)
-        self.level = 0
+        self.level = 1
         self.xp = self.level * 20
         self.special_skill = []
         self.skill_lenght = len(self.special_skill)
@@ -111,6 +102,7 @@ class warrior:
         elif self.special_punch == 0:
             return int(punch)
 
+#basic rumble upgraded attack
     def rumble_attack(self):
         self.rumble = self.stre * 2
         chance = randint(0,100)
@@ -132,9 +124,6 @@ class warrior:
         elif self.special_rumble == 0:
             self.life -= 1
             return int(self.rumble)
-
-
-                        ###################### LEVEL UP ######################
 
     def melee_attack(self):
         character_choice = input('Kick: [k/K]'
@@ -164,6 +153,7 @@ class warrior:
             print('Returning to previous options')
             return 0
 
+    ###################### LEVEL UP ######################
 
     def level_up(self):  # 10 points
         self.level += 1
@@ -181,7 +171,7 @@ class warrior:
                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
         while remaining_points > 0:
-            if point_distribution == 'i' or point_distribution == 'I':
+            if point_distribution in list_role[0:2]:
                 point_quantity = int(input('Insert how many points you want in this attribute: '))
                 remaining_points -= point_quantity
                 self.intel += point_quantity
@@ -196,7 +186,7 @@ class warrior:
                                                f'\nLuck: [l/L] - Overall Luck - 1 cost')
                 else:
                     print('No more points to distribute!')
-            elif point_distribution == 'd' or point_distribution == 'D':
+            elif point_distribution in list_role[6:8]:
                 point_quantity = int(input('Insert how many points you want in this attribute: '))
                 remaining_points -= point_quantity
                 self.dex += point_quantity
@@ -211,7 +201,7 @@ class warrior:
                                                f'\nLuck: [l/L] - Overall Luck - 1 cost')
                 else:
                     print('No more points to distribute!')
-            elif point_distribution == 'l' or point_distribution == 'L':
+            elif point_distribution in list_role[8:10]:
                 point_quantity = int(input('Insert how many points you want in this attribute: '))
                 remaining_points -= point_quantity
                 self.luck += point_quantity
@@ -224,7 +214,7 @@ class warrior:
                                                f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                f'\nLuck: [l/L] - Overall Luck - 1 cost')
-            elif point_distribution == 's' or point_distribution == 'S':
+            elif point_distribution  in list_role[2:4]:
                 point_quantity = int(input('Insert how many points you want in this attribute: '))
                 remaining_points -= point_quantity
                 self.stre += point_quantity
@@ -237,7 +227,7 @@ class warrior:
                                                f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                f'\nLuck: [l/L] - Overall Luck - 1 cost')
-            elif point_distribution == 'c' or point_distribution == 'C':
+            elif point_distribution in list_role[4:6]:
                 point_quantity = int(input('Insert how many points you want in this attribute: '))
                 remaining_points -= point_quantity
                 self.con += point_quantity
@@ -272,7 +262,7 @@ class warrior:
                             '\nPaladin: [p/P]'
                             '\nBrute: [b/B]'
                             '\nMongrel: [m/M]')
-        if role_choice == 'p' or role_choice == 'P':
+        if role_choice in list_warrior_path[0:2]:
             print('You are now a Paladin, prepare for a 20 points stat boost!')
             #20 points
             self.con += 3
@@ -288,7 +278,7 @@ class warrior:
                                        f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                        f'\nLuck: [l/L] - Overall Luck - 1 cost')
             while remaining_points > 0:
-                if point_distribution == 'i' or point_distribution == 'I':
+                if point_distribution in list_role[0:2]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.intel += point_quantity
@@ -303,7 +293,7 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-                elif point_distribution == 'd' or point_distribution == 'D':
+                elif point_distribution in list_role[6:8]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.dex += point_quantity
@@ -318,7 +308,7 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-                elif point_distribution == 'l' or point_distribution == 'L':
+                elif point_distribution in list_role[8:10]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.luck += point_quantity
@@ -331,7 +321,7 @@ class warrior:
                                                    f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
-                elif point_distribution == 's' or point_distribution == 'S':
+                elif point_distribution in list_role[2:4]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.stre += point_quantity
@@ -344,7 +334,7 @@ class warrior:
                                                    f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
-                elif point_distribution == 'c' or point_distribution == 'C':
+                elif point_distribution in list_role[4:6]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.con += point_quantity
@@ -360,14 +350,14 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-        elif role_choice == 'b' or role_choice == 'B':
+        elif role_choice in list_warrior_path[2:4]:
             print('You are now a Brute, prepare for a stat boost!')
             self.con += 2
             self.stre += 3
             self.job = 'brute'
             remaining_points = 15
             point_distribution = input(f'You changed your role!'
-                                       f'\n20 points gained, 5 points are obligatory to Strenght and Constitution for Brute role'
+                                       f'\n20 points gained, 5 points are obligatory to Constitution and Intelligence for Paladin role'
                                        f'\n15 points remainig to distribute:'
                                        f'\nStrenght: [s/S] - Melee Damage - 1 cost'
                                        f'\nConstitution: [c/C] - Life and Defence - 1 cost'
@@ -375,7 +365,7 @@ class warrior:
                                        f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                        f'\nLuck: [l/L] - Overall Luck - 1 cost')
             while remaining_points > 0:
-                if point_distribution == 'i' or point_distribution == 'I':
+                if point_distribution in list_role[0:2]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.intel += point_quantity
@@ -390,7 +380,7 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-                elif point_distribution == 'd' or point_distribution == 'D':
+                elif point_distribution in list_role[6:8]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.dex += point_quantity
@@ -405,7 +395,7 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-                elif point_distribution == 'l' or point_distribution == 'L':
+                elif point_distribution in list_role[8:10]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.luck += point_quantity
@@ -418,7 +408,7 @@ class warrior:
                                                    f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
-                elif point_distribution == 's' or point_distribution == 'S':
+                elif point_distribution in list_role[2:4]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.stre += point_quantity
@@ -431,7 +421,7 @@ class warrior:
                                                    f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
-                elif point_distribution == 'c' or point_distribution == 'C':
+                elif point_distribution in list_role[4:6]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.con += point_quantity
@@ -449,14 +439,14 @@ class warrior:
                         print('No more points to distribute!')
             #print stats and define bonus
             self.job = 'brute'
-        elif  role_choice == 'm' or role_choice == 'M':
+        elif role_choice in list_warrior_path[4:6]:
             print('You are now a Brute, prepare for a stat boost!')
             self.stre += 3
             self.dex += 2
             self.job = 'mongrel'
             remaining_points = 15
             point_distribution = input(f'You changed your role!'
-                                       f'\n20 points gained, 5 points are obligatory to Strenght and Dexterity for Mongrel role'
+                                       f'\n20 points gained, 5 points are obligatory to Constitution and Intelligence for Paladin role'
                                        f'\n15 points remainig to distribute:'
                                        f'\nStrenght: [s/S] - Melee Damage - 1 cost'
                                        f'\nConstitution: [c/C] - Life and Defence - 1 cost'
@@ -464,7 +454,7 @@ class warrior:
                                        f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                        f'\nLuck: [l/L] - Overall Luck - 1 cost')
             while remaining_points > 0:
-                if point_distribution == 'i' or point_distribution == 'I':
+                if point_distribution in list_role[0:2]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.intel += point_quantity
@@ -479,7 +469,7 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-                elif point_distribution == 'd' or point_distribution == 'D':
+                elif point_distribution in list_role[6:8]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.dex += point_quantity
@@ -494,7 +484,7 @@ class warrior:
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
                     else:
                         print('No more points to distribute!')
-                elif point_distribution == 'l' or point_distribution == 'L':
+                elif point_distribution in list_role[8:10]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.luck += point_quantity
@@ -507,7 +497,7 @@ class warrior:
                                                    f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
-                elif point_distribution == 's' or point_distribution == 'S':
+                elif point_distribution in list_role[2:4]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.stre += point_quantity
@@ -520,7 +510,7 @@ class warrior:
                                                    f'\nIntelligence: [i/I] - Magic Damage - 1 cost'
                                                    f'\nDexterity: [d/D] - Ranged Damage - 1 cost'
                                                    f'\nLuck: [l/L] - Overall Luck - 1 cost')
-                elif point_distribution == 'c' or point_distribution == 'C':
+                elif point_distribution in list_role[4:6]:
                     point_quantity = int(input('Insert how many points you want in this attribute: '))
                     remaining_points -= point_quantity
                     self.con += point_quantity
@@ -595,7 +585,7 @@ class warrior:
                 if modifier_choice == 's' or modifier_choice == 'S':
                     self.special_skill -= 1
                     print('Now your Rumble attack has 25% stun chance!')
-            else:
+            else: #put the protector while up ^^^
                 while skill_choice not in cat_jump:
                     skill_choice = input('Sorry, type again!'
                                          '\nKick: [k/K] (20% Critical chance /OR/ +40% Damage Increase)'
@@ -659,4 +649,6 @@ class warrior:
                                          '\nRumble: [r/R] (25% Stun chance /OR/ 10% Combo chance)')
         elif self.skill_lenght == 3:
             self.job_upgrade()
+
+
 
